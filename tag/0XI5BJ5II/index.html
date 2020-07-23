@@ -1,177 +1,230 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>近之的博客</title>
-<link rel="shortcut icon" href="https://blog.hacking.icu/favicon.ico">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
-<link rel="stylesheet" href="https://blog.hacking.icu/media/css/tailwind.css">
+<html>
+  <head>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>时政 | 近之的博客</title>
+<link rel="shortcut icon" href="https://blog.hacking.icu/favicon.ico?v=1595529666771">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://blog.hacking.icu/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="时政 | 近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
-    
+
 
   <meta name="description" content="或长或短终有尽头，且走且停绝无退路。" />
-</head>
-<body>
-  <div class="antialiased flex flex-col min-h-screen" id="app">
-
-    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
-  <div class="flex justify-end px-4">
-    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
-      <i class="ri-close-line" v-show="showMenu"></i>
-      <i class="ri-menu-3-line" v-show="!showMenu"></i>
-    </div>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://blog.hacking.icu">
+  <img class="avatar" src="https://blog.hacking.icu/images/avatar.png?v=1595529666771" alt="">
+  </a>
+  <h1 class="site-title">
+    近之的博客
+  </h1>
+  <p class="site-description">
+    或长或短终有尽头，且走且停绝无退路。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
+  <div class="social-container">
     
-      <a href="/" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        首页
-      </a>
+      
     
-      <a href="/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        归档
-      </a>
+      
     
-      <a href="/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        标签
-      </a>
+      
     
-      <a href="/post/about" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        关于
-      </a>
+      
     
-    <a href="https://blog.hacking.icu/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-      RSS
-    </a>
-  </nav>
+      
+    
+  </div>
 </div>
 
-    <div class="max-w-4xl w-full mx-auto pt-32">
-      <h1 class="text-2xl font-bold pb-8 flex justify-center items-center">
-        <i class="ri-hashtag"></i>
-        时政
-      </h1>
-      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
-        
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://blog.hacking.icu/post/guan-zhuang-bing-du-zai-man-yan/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          冠状病毒在蔓延
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2020-03-16</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        疫情在地理上出现了戏剧化的转变，我宁愿他从来没有出现过。
-假如疫情没有出现，现在是否会更好？疫情席卷后，这个世界是否会变得更好？这都取决于人们反思的深度和广度。
-中国民众，处在专制体制下的民众，开始了反思，为什么会有李文亮这个不是英雄的英雄...
-      </div>
-      <a href="https://blog.hacking.icu/post/guan-zhuang-bing-du-zai-man-yan/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://blog.hacking.icu/post/dan-mai-mei-ti-fa-biao-bing-du-guo-qi-shi-jian/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          丹麦媒体发表病毒国旗事件
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2020-01-31</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        我看到有些人同样丑化了丹麦的国旗，我认为这种以以其人之道还治其人之身的做法很好。
-长期以来，中国政府以及人民在国际舆论场上的音量是十分卑微的。究其原因，很大程度是是价值观的差异，以及西方强大的舆论态势。所以，以孔子学院为代表的论述方式，现在...
-      </div>
-      <a href="https://blog.hacking.icu/post/dan-mai-mei-ti-fa-biao-bing-du-guo-qi-shi-jian/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://blog.hacking.icu/post/huang-zhi-feng-jie-shou-lesslessnan-de-greatergreater-cai-fang/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          黄之锋接收《南德》采访
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-11-19</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        刚看到《南德》采访黄之锋的报道，黄说到：
-
-我的责任是，让全世界听到抗议者的声音。我用我的知名度支持运动。我有前线经验，但我不是制造燃烧弹的专家。&quot;&quot;虽然我不参加抗议示威活动，但我用文章和评论援助一线的示威者。
-
-总的来...
-      </div>
-      <a href="https://blog.hacking.icu/post/huang-zhi-feng-jie-shou-lesslessnan-de-greatergreater-cai-fang/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://blog.hacking.icu/post/xiang-gang-fan-song-zhong-de-di-yi-qiang/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          香港反送中的第一枪
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-10-23</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        如你我所见，香港警察的子弹穿过了学生的胸膛。所幸，暂无性命之忧。
-这个时候再说什么立场已经没有意义，双方都有各自坚定且不能退让的缘由。
-这场行动短期内也不会落幕，示威者中，有的人会后退，有的人会更进一步。双方以及香港的牺牲会进一步扩大。
-回...
-      </div>
-      <a href="https://blog.hacking.icu/post/xiang-gang-fan-song-zhong-de-di-yi-qiang/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://blog.hacking.icu/post/ran-shao-de-fan-song-zhong-jian-ao-de-xiang-gang/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          燃烧的反送中，煎熬的香港
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-10-03</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        香港之事愈演愈烈，究竟对谁有好处？除了台湾的民进党，和美国的一部分议员，香港的民阵，泛民，我想不出有别人。你看看这些人在干嘛？义正词严地煽风点火。
-整个事件中，行行业业都涉入其中。比较突出的是政客以及媒体，他们共同的特点是都具有强大的话语权...
-      </div>
-      <a href="https://blog.hacking.icu/post/ran-shao-de-fan-song-zhong-jian-ao-de-xiang-gang/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
+        <div class="current-tag-container">
+            <h2 class="title">
+                标签：# 时政
+            </h2> 
+        </div>
+        <div class="post-container">
   
+    <article class="post">
+      <a href="https://blog.hacking.icu/post/guan-zhuang-bing-du-zai-man-yan/">
+        <h2 class="post-title">冠状病毒在蔓延</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-03-16
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://blog.hacking.icu/tag/0XI5BJ5II/" class="post-tag">
+            # 时政
+          </a>
+        
+          <a href="https://blog.hacking.icu/tag/khqRkU11nt/" class="post-tag">
+            # 评论
+          </a>
+        
       </div>
-
       
-      <footer class="py-12 text-center px-4 md:px-0" v-pre>
-  可不可以不备案？@近之
-</footer>
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://blog.hacking.icu/post/dan-mai-mei-ti-fa-biao-bing-du-guo-qi-shi-jian/">
+        <h2 class="post-title">丹麦媒体发表病毒国旗事件</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-01-31
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://blog.hacking.icu/tag/0XI5BJ5II/" class="post-tag">
+            # 时政
+          </a>
+        
+          <a href="https://blog.hacking.icu/tag/khqRkU11nt/" class="post-tag">
+            # 评论
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://blog.hacking.icu/post/huang-zhi-feng-jie-shou-lesslessnan-de-greatergreater-cai-fang/">
+        <h2 class="post-title">黄之锋接收《南德》采访</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-11-19
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://blog.hacking.icu/tag/0XI5BJ5II/" class="post-tag">
+            # 时政
+          </a>
+        
+          <a href="https://blog.hacking.icu/tag/khqRkU11nt/" class="post-tag">
+            # 评论
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://blog.hacking.icu/post/xiang-gang-fan-song-zhong-de-di-yi-qiang/">
+        <h2 class="post-title">香港反送中的第一枪</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-23
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://blog.hacking.icu/tag/0XI5BJ5II/" class="post-tag">
+            # 时政
+          </a>
+        
+          <a href="https://blog.hacking.icu/tag/khqRkU11nt/" class="post-tag">
+            # 评论
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://blog.hacking.icu/post/ran-shao-de-fan-song-zhong-jian-ao-de-xiang-gang/">
+        <h2 class="post-title">燃烧的反送中，煎熬的香港</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-03
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://blog.hacking.icu/tag/0XI5BJ5II/" class="post-tag">
+            # 时政
+          </a>
+        
+          <a href="https://blog.hacking.icu/tag/khqRkU11nt/" class="post-tag">
+            # 评论
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+</div>
 
+        <div class="pagination-container">
+  
+  
+</div>
+
+        <div class="site-footer">
+  可不可以不备案？@近之
+  <a class="rss" href="https://blog.hacking.icu/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://blog.hacking.icu/media/scripts/main.js"></script>
-</body>
+  </body>
 </html>
