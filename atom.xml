@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jinzhi2020.github.io</id>
-    <title>苏近之的博客</title>
-    <updated>2020-07-23T18:13:10.250Z</updated>
+    <title>近知的博客</title>
+    <updated>2020-07-23T18:13:58.554Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jinzhi2020.github.io"/>
     <link rel="self" href="https://jinzhi2020.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://jinzhi2020.github.io/images/avatar.png</logo>
     <icon>https://jinzhi2020.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, 苏近之的博客</rights>
+    <rights>All rights reserved 2020, 近知的博客</rights>
     <entry>
         <title type="html"><![CDATA[我又开始写日记了]]></title>
         <id>https://jinzhi2020.github.io/post/wo-you-kai-shi-xie-ri-ji-liao/</id>

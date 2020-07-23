@@ -1,64 +1,133 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>我又开始写日记了 | 苏近之的博客</title>
-<link rel="shortcut icon" href="https://jinzhi2020.github.io/favicon.ico?v=1595527899394">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+    
+<meta charset="utf-8" >
+
+<title>我又开始写日记了 | 近知的博客</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinzhi2020.github.io/favicon.ico?v=1595528035213">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinzhi2020.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="我又开始写日记了 | 苏近之的博客 - Atom Feed" href="https://jinzhi2020.github.io/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="我是喜欢写日记的，从小学断断续续到大学，直到大一期末的时候。
-在工作之后，我又开始写日记了，也不知道什么时候又断了。
-如今我又开始了，有些话只能说给自己听，有些话也只有听自己的。
-说心里话，我的生活并不如意。虽然，我确实希望得到别人，特别是..." />
-    <meta name="keywords" content="生活,日记" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://jinzhi2020.github.io">
-  <img class="avatar" src="https://jinzhi2020.github.io/images/avatar.png?v=1595527899394" alt="">
-  </a>
-  <h1 class="site-title">
-    苏近之的博客
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinzhi2020.github.io">
+        <img class="avatar" src="https://jinzhi2020.github.io/images/avatar.png?v=1595528035213" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinzhi2020.github.io">
+        <h1 class="site-title">近知的博客</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">我又开始写日记了</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-07-24</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://jinzhi2020.github.io/tag/ii4pLinPn/">
+                    生活
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://jinzhi2020.github.io/tag/ixV-ScT7no/">
+                    日记
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>我是喜欢写日记的，从小学断断续续到大学，直到大一期末的时候。</p>
+<p>在工作之后，我又开始写日记了，也不知道什么时候又断了。</p>
+<p>如今我又开始了，有些话只能说给自己听，有些话也只有听自己的。</p>
+<p>说心里话，我的生活并不如意。虽然，我确实希望得到别人，特别是家人的喜欢。尽管，这样看似简单的希望，却难以得到满足。这大概也是我不如意的生活的一部分吧。</p>
+<p>生活不如意，工作也是不如意的。虽然，我如愿以偿得到了不低的薪水，虽然我真正地去管理带领一个对我来说不小的团队，但在将近一年的时间里，我并没有让这个团队达到预期的健壮。从而，我是失职的，更是辜负了自己对自己的期望。尽管我仍然在努力。</p>
+<p>生活和工作都不尽如人意，我却不能因此而气馁，仍需努力。因为不尽如人意的生活也是我人生观的一部分，而靠努力去获取一些些满足则是我价值观的一部分。所以，这是自然的，也是理想的，更是现实的。</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinzhi2020.github.io/post/guan-zhuang-bing-du-zai-man-yan/">
+              <h3 class="post-title">
+                下一篇：冠状病毒在蔓延
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
   <div class="social-container">
     
       
@@ -72,110 +141,26 @@
       
     
   </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinzhi2020.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              我又开始写日记了
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-07-24
-              </span>
-              <span>
-                2 min read
-              </span>
-              
-                <a href="https://jinzhi2020.github.io/tag/ii4pLinPn/" class="post-tag">
-                  # 生活
-                </a>
-              
-                <a href="https://jinzhi2020.github.io/tag/ixV-ScT7no/" class="post-tag">
-                  # 日记
-                </a>
-              
-            </div>
-            
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>我是喜欢写日记的，从小学断断续续到大学，直到大一期末的时候。</p>
-<p>在工作之后，我又开始写日记了，也不知道什么时候又断了。</p>
-<p>如今我又开始了，有些话只能说给自己听，有些话也只有听自己的。</p>
-<p>说心里话，我的生活并不如意。虽然，我确实希望得到别人，特别是家人的喜欢。尽管，这样看似简单的希望，却难以得到满足。这大概也是我不如意的生活的一部分吧。</p>
-<p>生活不如意，工作也是不如意的。虽然，我如愿以偿得到了不低的薪水，虽然我真正地去管理带领一个对我来说不小的团队，但在将近一年的时间里，我并没有让这个团队达到预期的健壮。从而，我是失职的，更是辜负了自己对自己的期望。尽管我仍然在努力。</p>
-<p>生活和工作都不尽如人意，我却不能因此而气馁，仍需努力。因为不尽如人意的生活也是我人生观的一部分，而靠努力去获取一些些满足则是我价值观的一部分。所以，这是自然的，也是理想的，更是现实的。</p>
 
-              </div>
-              <div class="toc-container">
-                
-              </div>
-            </div>
-          </article>
-        </div>
-
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://jinzhi2020.github.io/post/guan-zhuang-bing-du-zai-man-yan/">
-              <h3 class="post-title">
-                冠状病毒在蔓延
-              </h3>
-            </a>
-          </div>
-        
-
-        
-
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://jinzhi2020.github.io/atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
-</div>
-
-      </div>
     </div>
+    <script type="application/javascript">
 
-    <script>
-      hljs.initHighlightingOnLoad()
+hljs.initHighlightingOnLoad()
 
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
+</script>
 
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
 
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
 
-    </script>
+
   </body>
 </html>
