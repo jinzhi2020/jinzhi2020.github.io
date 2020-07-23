@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://blog.hacking.icu</id>
+    <id>https://jinzhi2020.github.io</id>
     <title>苏近之的博客</title>
-    <updated>2020-07-23T18:02:59.058Z</updated>
+    <updated>2020-07-23T18:11:06.817Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://blog.hacking.icu"/>
-    <link rel="self" href="https://blog.hacking.icu/atom.xml"/>
+    <link rel="alternate" href="https://jinzhi2020.github.io"/>
+    <link rel="self" href="https://jinzhi2020.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://blog.hacking.icu/images/avatar.png</logo>
-    <icon>https://blog.hacking.icu/favicon.ico</icon>
+    <logo>https://jinzhi2020.github.io/images/avatar.png</logo>
+    <icon>https://jinzhi2020.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 苏近之的博客</rights>
     <entry>
         <title type="html"><![CDATA[我又开始写日记了]]></title>
-        <id>https://blog.hacking.icu/post/wo-you-kai-shi-xie-ri-ji-liao/</id>
-        <link href="https://blog.hacking.icu/post/wo-you-kai-shi-xie-ri-ji-liao/">
+        <id>https://jinzhi2020.github.io/post/wo-you-kai-shi-xie-ri-ji-liao/</id>
+        <link href="https://jinzhi2020.github.io/post/wo-you-kai-shi-xie-ri-ji-liao/">
         </link>
         <updated>2020-07-23T16:44:48.000Z</updated>
         <content type="html"><![CDATA[<p>我是喜欢写日记的，从小学断断续续到大学，直到大一期末的时候。</p>
@@ -26,8 +26,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[冠状病毒在蔓延]]></title>
-        <id>https://blog.hacking.icu/post/guan-zhuang-bing-du-zai-man-yan/</id>
-        <link href="https://blog.hacking.icu/post/guan-zhuang-bing-du-zai-man-yan/">
+        <id>https://jinzhi2020.github.io/post/guan-zhuang-bing-du-zai-man-yan/</id>
+        <link href="https://jinzhi2020.github.io/post/guan-zhuang-bing-du-zai-man-yan/">
         </link>
         <updated>2020-03-15T22:56:43.000Z</updated>
         <content type="html"><![CDATA[<p>疫情在地理上出现了戏剧化的转变，我宁愿他从来没有出现过。</p>
@@ -42,8 +42,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[丹麦媒体发表病毒国旗事件]]></title>
-        <id>https://blog.hacking.icu/post/dan-mai-mei-ti-fa-biao-bing-du-guo-qi-shi-jian/</id>
-        <link href="https://blog.hacking.icu/post/dan-mai-mei-ti-fa-biao-bing-du-guo-qi-shi-jian/">
+        <id>https://jinzhi2020.github.io/post/dan-mai-mei-ti-fa-biao-bing-du-guo-qi-shi-jian/</id>
+        <link href="https://jinzhi2020.github.io/post/dan-mai-mei-ti-fa-biao-bing-du-guo-qi-shi-jian/">
         </link>
         <updated>2020-01-31T04:13:58.000Z</updated>
         <content type="html"><![CDATA[<p>我看到有些人同样丑化了丹麦的国旗，我认为这种以以其人之道还治其人之身的做法很好。</p>
@@ -55,8 +55,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[黄之锋接收《南德》采访]]></title>
-        <id>https://blog.hacking.icu/post/huang-zhi-feng-jie-shou-lesslessnan-de-greatergreater-cai-fang/</id>
-        <link href="https://blog.hacking.icu/post/huang-zhi-feng-jie-shou-lesslessnan-de-greatergreater-cai-fang/">
+        <id>https://jinzhi2020.github.io/post/huang-zhi-feng-jie-shou-lesslessnan-de-greatergreater-cai-fang/</id>
+        <link href="https://jinzhi2020.github.io/post/huang-zhi-feng-jie-shou-lesslessnan-de-greatergreater-cai-fang/">
         </link>
         <updated>2019-11-18T17:29:51.000Z</updated>
         <content type="html"><![CDATA[<p>刚看到《南德》采访黄之锋的报道，黄说到：</p>
@@ -70,8 +70,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[香港反送中的第一枪]]></title>
-        <id>https://blog.hacking.icu/post/xiang-gang-fan-song-zhong-de-di-yi-qiang/</id>
-        <link href="https://blog.hacking.icu/post/xiang-gang-fan-song-zhong-de-di-yi-qiang/">
+        <id>https://jinzhi2020.github.io/post/xiang-gang-fan-song-zhong-de-di-yi-qiang/</id>
+        <link href="https://jinzhi2020.github.io/post/xiang-gang-fan-song-zhong-de-di-yi-qiang/">
         </link>
         <updated>2019-10-22T17:37:31.000Z</updated>
         <content type="html"><![CDATA[<p>如你我所见，香港警察的子弹穿过了学生的胸膛。所幸，暂无性命之忧。</p>
@@ -87,8 +87,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[燃烧的反送中，煎熬的香港]]></title>
-        <id>https://blog.hacking.icu/post/ran-shao-de-fan-song-zhong-jian-ao-de-xiang-gang/</id>
-        <link href="https://blog.hacking.icu/post/ran-shao-de-fan-song-zhong-jian-ao-de-xiang-gang/">
+        <id>https://jinzhi2020.github.io/post/ran-shao-de-fan-song-zhong-jian-ao-de-xiang-gang/</id>
+        <link href="https://jinzhi2020.github.io/post/ran-shao-de-fan-song-zhong-jian-ao-de-xiang-gang/">
         </link>
         <updated>2019-10-02T19:35:37.000Z</updated>
         <content type="html"><![CDATA[<p>香港之事愈演愈烈，究竟对谁有好处？除了台湾的民进党，和美国的一部分议员，香港的民阵，泛民，我想不出有别人。你看看这些人在干嘛？义正词严地煽风点火。</p>
