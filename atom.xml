@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.hacking.icu</id>
     <title>近之的博客</title>
-    <updated>2020-07-27T06:50:35.921Z</updated>
+    <updated>2020-07-27T13:14:24.789Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.hacking.icu"/>
     <link rel="self" href="https://blog.hacking.icu/atom.xml"/>
@@ -84,6 +84,274 @@
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Python 中的面向对象编程]]></title>
+        <id>https://blog.hacking.icu/post/python-zhong-de-mian-xiang-dui-xiang-bian-cheng/</id>
+        <link href="https://blog.hacking.icu/post/python-zhong-de-mian-xiang-dui-xiang-bian-cheng/">
+        </link>
+        <updated>2020-07-15T13:00:55.000Z</updated>
+        <content type="html"><![CDATA[<p>学习面向对象，如果一开始就从理论说起，可能会非常难以理解。所以，我尝试从语法层面说起，这样可能更好理解一些</p>
+<h3 id="什么是类">什么是类</h3>
+<p>在说面向对象之前，需要先从类( Class ) 说起，因为是先有类，再有对象的。我们可以创建一个类:</p>
+<pre><code class="language-python">class Person:
+    name = 'Bob'
+    age = 14
+    
+    def go():
+        print('go')
+</code></pre>
+<p>比如 <code>name</code> 、 <code>age</code> 都是类的属性，也可以理解成类当中的变量(叫做属性)。类当中还有一个函数(这样的说法不准确，类当中的函数叫做方法) ，叫做 <code>go</code> 。</p>
+<p>通过上面这个例子，我们可以来给类从语法层面下一个定义了:</p>
+<blockquote>
+<p>所谓的类，一种数据类型，包含变量和方法。</p>
+</blockquote>
+<p>说类也是一种数据类型，就像列表一样。我们来看看如何声明一个列表:</p>
+<pre><code class="language-python">pers = ['bob', 'june']
+</code></pre>
+<p>你看，列表是一组数据的集合。那么对象呢?和列表不一样的是，它是变量(属性)和函数(方法)的集合。我们访问列表中的元素:</p>
+<pre><code class="language-python">print(pers[0])  # bob
+</code></pre>
+<p>我们访问对象中的属性：</p>
+<pre><code class="language-python">print(Person.name)
+</code></pre>
+<p>所以，从语法层面而言，不要把类看得很特殊，其实和列表、字典之类的数据类型没什么区别。 <strong>所以，我们说类本质上只是一种数据类型罢了。</strong> 如果是面试，说的好听点: <strong>从数据结构的角度来看，</strong> <strong>类是对数据和行为的封装</strong> 。</p>
+<h3 id="什么是对象">什么是对象</h3>
+<p>对象是从哪里来的？不是来源同桌，也不是来源于婚恋网站哦。在编程中，对象的来源只有一种，通过类生成一个对象（也叫做实例化）。所以，从语法上来说，对象是对类的拷贝。</p>
+<blockquote>
+<p>这实例化的概念，其实和现实世界不一样。因为现实世界中，我们是先有人，然后根据人的共同特征行为抽象出一个人类的概念。而在编程中，是先有类，然后根据类复制出一个具体的人。所以，这一点是和现实世界相反的。</p>
+</blockquote>
+<p>然后实例化的语法如下:</p>
+<pre><code class="language-python">class Person:
+    name = ''
+bob = Person()
+</code></pre>
+<p>单纯是类其实没什么意义，只有将类编程具体的人才是又意义。因为这个世界说到底，人类这个词还是由具体的某个人发明的。</p>
+<h3 id="什么是面向对象编程">什么是面向对象编程</h3>
+<p>从语法层面来说，Python 中的一切元素都是对象。其他的类型也是对象的一种子类型，举个例子，字符串也是一种对象:</p>
+<pre><code class="language-python">message = 'String'
+print(message.upper())  # STRING
+</code></pre>
+<p>从上面这个例子中，我们可以发现字符串也有行为(方法)。所以，什么是面向对象编程？ <strong>从语法层面来说，把编程语言中所有的实体(变量、类型、方法、表达式等)都作为对象， 然后我们使用各种对象进行编程。我们将这种做法称之为面向对象编程</strong> 。</p>
+<h3 id="什么是构造方法">什么是构造方法</h3>
+<p>一个类当中，只有两种东西，属性和方法，没有其他。很明显构造方法也是类的一个方法。而且构造方法也是一个特殊的方法。为什么说 <strong>构造方法是特殊的方法，因为这个方法由特殊的语法作用： 一般用来初始化对象</strong> 。</p>
+<p>当我们通过一个类复制出一个对象的时候(实例化), Python 就会去主动运行这个构造方法。我们自己定义的方法，必须在程序中手动的调用，而构造方法会在实例化的时候，由 Python 语言本身(解释器) 去执行它，而且构造方法的方法名称，必须是 <code>__init__</code> 。这就是它的特殊之处，用代码来演示:</p>
+<pre><code class="language-python">class Person:
+    name=&quot;&quot;
+    def __init__(self, name):
+        print(name)
+        
+    def say():
+        print(&quot;say&quot;)
+Person(&quot;Bob&quot;)
+</code></pre>
+<p>执行这段程序，只会输出 <code>Bob</code> ，但是在程序中，我们并没有手动的去调用 <code>__init__</code> 这个方法，这说明 Python 在 <code>Person('Bob')</code> 实例化的时候，会自动执行 <code>__init__</code> 方法。正如这个构造方法的方法名字(init)一样， <strong>我们通常会利用它会在实例化的时候自动执行这个特性，去初始化这个类的属性</strong> 。</p>
+<p>实际上，我们练习一下现实生活，每个孩子生下(实例化)的时候，就有双手双脚双眼双嘴(属性)。实际上，正是为了模拟现实中的这种情况，所以会有一个构造方法，来做这件事情。</p>
+<p><strong>切记: 编程是用来模拟现实的，在模拟现实的基础上，解决一些现实问题， 所以在学习编程的过程中，要时常地联系现实生活</strong>。</p>
+<h3 id="类变量和实例变量">类变量和实例变量</h3>
+<p>我们首先来定义一个类:</p>
+<pre><code class="language-python">class Duck:
+    # 定义在这个位置的称之为类变量
+    age = 2
+    def __init_(self, name):
+        # 定义在这个位置，称之为实例变量
+        self.name = name
+</code></pre>
+<p>关于类变量和实例变量，Python 语言和其他语言是很不一样的。Python 是根据定义的位置加以区分的，而其他语言可能会有特定的的关键字加以区分。下面以 PHP 为例:</p>
+<pre><code class="language-php">class Duck {
+    static $age = 2;   ## 类变量
+    $name = '';        ## 实例变量
+}
+</code></pre>
+<p>所以，关于类变量和实例变量，不能参照其他语言的经验。</p>
+<p>当我们去打印一个对象的变量的时候，会按照如下顺序去查找:</p>
+<ul>
+<li>先查找实例变量</li>
+<li>如果实例变量没有找到，会查找类变量</li>
+<li>如果类变量没有找到会查找继承的变量</li>
+</ul>
+<p>类或实例中地方法，在大多数时候是为了改变类的数据（也称之为类的状态）。所以，如何在类的方法中访问类变量或者实例变量呢？</p>
+<pre><code class="language-python"> class DuckDuckGo:
+    url = ''
+    def __init__(self, method = 'POST'):
+        # 访问实例变量
+        print(self.method)
+        # 访问类变量
+        print(DuckDuckGo.url)
+        print(self.__class__.url)
+</code></pre>
+<h3 id="实例方法-类方法和静态方法">实例方法、类方法和静态方法</h3>
+<h4 id="实例方法">实例方法</h4>
+<p>什么是实例方法， 就是我们在类方法中，将第一个参数定义为 <code>self</code> (也可以是其他的单词，比如说 <code>this</code> , 但 Python 推荐我们使用 <code>self</code>这个单词)。</p>
+<p>Python 会在我们调用这个方法时候，给个名为 <code>self</code> 的变量赋值，这个值就是当前调用这个方法的对象的实例。</p>
+<p>如果有其他的编程语言的经验，其他语言中会使用 <code>this</code> 这个关键字来表示当前实例，Python 也一样只是需要在方法声明的第一个传参显式地定义为 <code>self</code> 。</p>
+<pre><code class="language-python">class DuckDuckGo:
+    def search(self):
+        pass
+</code></pre>
+<h4 id="类方法">类方法</h4>
+<p>类方法的定义如下, 使用 <code>@classmethod</code> 注解来声明一个方法是类方法:</p>
+<pre><code class="language-python">class DuckDuckGo:
+    url = 'https://www.duckduckgo.com'
+    
+    @classmethod
+    def settings(cls):
+        print(cls.url)
+</code></pre>
+<p>和实例方法要在传参的列表中加入 <code>self</code> 一样，类方法也要在传参列表中添加一个名为 <code>cls</code> 的传参。这个名字也是约定俗成的，虽然也可以使用其他的名字。</p>
+<p>调用类方法如下:</p>
+<pre><code class="language-python">DuckDuckGo.settings()
+</code></pre>
+<h4 id="类方法和实例方法的区别">类方法和实例方法的区别</h4>
+<p>那么类方法和实例方法有什么区别呢？**类方法关联的是类本身，而实例方法关联的是实例本身。**这句话是不是好理解？我举一个例子: 当我们和别人谈论中午吃什么的时候，指的是我自己中午吃什么。而当国家领导人和欧盟主席谈论国际粮草供应的时候，讨论的是人类吃什么，而不是他们两个人中午吃什么。</p>
+<p>怎么什么时候用对象方法，什么时候用实例方法呢？当你想要改变实例变量的时候，用实例方法。当你想要改变类变量的时候，使用类方法。</p>
+<blockquote>
+<p>注意: 在 Python 中，我们可以在实例方法中，改变类变量，也可以使用实例对象来调用类方法。但是并不建议这么做，虽然语法上允许这么做，但是违反了类和对象实例的语义。</p>
+</blockquote>
+<h4 id="静态方法">静态方法</h4>
+<p>静态方法的定义语法如下:</p>
+<pre><code class="language-python">class DuckDuckGo:
+    url = 'https://www.duckduck.com'
+    @staticmethod
+    def ping():
+        print(DuckDuckGo.url)
+</code></pre>
+<p>那么静态方法和类方法以及实例方法的区别？</p>
+<p>最大的不同在于，静态方法并没有向类方法和实例方法一样要传入一个类似于 <code>self</code> 和 <code>cls</code> 这样的传参。另外，静态方法，可以同时通过类或者实例对象取调用。</p>
+<pre><code class="language-python">DuckDuckGo.ping()
+ddk = DuckDuckGo()
+ddk.ping()
+</code></pre>
+<p>类方法和静态方法都是可以使用类变量，但是不能调用对象方法。</p>
+<p>在其他的语言中，静态方法和类方法是一样的。但是在 Python 中，将其区分开来了。**并不建议在实际的编程中使用静态方法，因为它和类以及对象的关联是很弱的。**基本上，静态方法都可以使用类方法代替。</p>
+<h3 id="属性和方法的可见性">属性和方法的可见性</h3>
+<p>在面向对象的设计中，属性和方法是可以设置可见性的（你可以理解成，我不想让别人看到我的心）。在 Python中，可见性分为 Public(公开), Private（私有) 两种。<br /></p>
+<p>区别与其他的语言，并没有类似于 Public 或者 Private 这样的关键字的修饰，而是使用双下划线的方式区分是否为公开或私有的属性方法:</p>
+<pre><code class="language-python">class DuckDuckGo:
+    __url = 'https://www.duckduckgo.com'
+    
+    def __dns():
+        pass
+</code></pre>
+<p>如果你调用私有的 <code>__dns</code> 方法，Python 会给出错误的提示:</p>
+<pre><code class="language-python">&gt;&gt;&gt; DuckDuckGo.__dns()
+Traceback (most recent call last):
+  File &quot;test.py&quot;, line 9, in &lt;module&gt;
+    DuckDuckGo.__dns()
+AttributeError: type object 'DuckDuckGo' has no attribute '__dns'
+</code></pre>
+<p>如果你调用私有的变量，同样也会报错:</p>
+<pre><code class="language-python">&gt;&gt;&gt; print(DuckDuckGo.__url)
+Traceback (most recent call last):
+  File &quot;test.py&quot;, line 9, in &lt;module&gt;
+    print(DuckDuckGo.__url)
+AttributeError: type object 'DuckDuckGo' has no attribute '__url'
+</code></pre>
+<p>我们可以通过打印对象的 <code>__dict__</code> 来查看对象的所有的成员变量:</p>
+<pre><code class="language-python">&gt;&gt;&gt; print(DuckDuckGo.__dict__)
+...省略...'_DuckDuckGo__url': 'https://www.duckduckgo.com', '_DuckDuckGo__dns': &lt;function DuckDuckGo.__dns at 0x7f27771ae0d0&gt;
+</code></pre>
+<p>从上面的输出可以看到，Python 内部处理私有的属性和方法，是将我们的属性和方法重命名为 <code>_类名+变量/方法名</code> , 例如 <code>_DuckDuckGo__url</code> 和 <code>_DuckDuckGo__dns</code> 。<br /></p>
+<p>所以，其实没有什么是不能访问的，私有的也是可以访问的。之所以我们访问的时候报错，是因为 Python 将我们的私有变量重命名了。如果要访问，也是访问重命名之后的变量或方法:</p>
+<pre><code class="language-python">&gt;&gt;&gt; print(DuckDuckGo._DuckDuckGo__url)
+https://www.duckduckgo.com
+</code></pre>
+<p><strong>所以，严格意义上来讲，Python 并没有对成员变量或方法的可见性设置一种可靠的机制来禁止其他实体的对其进行访问。</strong></p>
+<h3 id="继承">继承</h3>
+<h4 id="什么是继承">什么是继承</h4>
+<p>其实我们在之前地例子中，我们已经使用过继承了。我们自己创建了一个类 <code>Person</code> , 在这个类中有一个特殊地方法，我们叫它为构造方法 <code>__init__</code> 。那么这个名为构造方法地方法是从哪里来地呢？是从继承得到的。那么它是继承谁的呢？继承一个名为 object 的对象的。这个对象是 Python 语言本身提供的对象，所有其他的对象都默认继承这个对象:</p>
+<pre><code class="language-python">class Person(object):
+    pass
+class Person:
+    pass
+</code></pre>
+<p>上面两种写法是一样，默认情况下，我们创建的类就是继承 object 类的。object 类当中声明了一些类似于 _ <em>init</em>_ 这样的方法，这些方法都会在特定的时候，由 Python 语言本身去调用。<br /></p>
+<p><strong>继承这个概念，也是来源于生活的。我一生下来，就继承了我爸爸妈妈的部分基因</strong> <strong>，这也是编程中的继承在语法层面的含义</strong> 。</p>
+<p>我们再来举一个例子:</p>
+<pre><code class="language-python">class Person(object):
+    def say(self):
+        print('say')
+class Father(Person):
+    def teach_kids():
+        print('teach')
+bob = Father()
+bob.say()      # say
+</code></pre>
+<p>这个程序运行之后，输出了 say 。可是我们在 Father 这个类中，并没有声明一个 say 的方法，却可以调用，这是为什么呢？因为 Father 这个类继承了 Person 这个类，而 Person 这个类声明了 say 这个方法，被 Father 类继承。 <strong>所以，我们说继承从语法层面来说，是为了实现类的属性或方法的复用</strong> 。</p>
+<p>然后，这个 Father 类自己还有一个名为 <code>teach_kids</code> 的方法，意思是教育孩子。Father 不光是继承了 Person 类的 say 方法，而且还延申扩展出了教育孩子的行为能力。 <strong>所以，继承还能扩展类的能力，这也是符合现实情况的，我们有句话叫做青出于蓝而胜于蓝，就是这样的道理</strong> 。</p>
+<h4 id="什么是重写">什么是重写</h4>
+<p>上面的例子中，Person 拥有 say 方法，而 Father 自动继承了 Person 的 say 方法。那么如果 Person 有 say 方法， Father 自己也有 say 方法呢？</p>
+<pre><code class="language-python">class Person(object):
+    def say(self):
+        print('Person say')
+class Father(Person):
+    def say(self):
+        print('Father say')
+my_father = Father()
+my_father.say()       # 这里输出是 Person say 还是 Father say 呢？
+</code></pre>
+<p>当然，输出的是 Father say 啦。 <strong>因为如果父类(Person) 和子类(Father) 都有相同一个方法，那么子类中的方法会重写父类中的方法</strong> 。</p>
+<p>这样例子，在现实生活中，也比比皆是。举个例子: 我父亲的足球踢得很好，而我并没有继承我父亲的这个基因，虽然也会踢足球，但是提的不好。所以，没有道理，我一定要和我父亲一样能踢好足球。说到底，我虽然继承了我父亲的一些基因，但是我终究是我自己，以我自己的实际情况为准，而不是父亲的复制品。</p>
+<h4 id="站在巨人super的肩膀上">站在巨人（super）的肩膀上</h4>
+<p>“如果我看得比别人更远，那是因为我站在巨人的肩膀上。”这是牛顿说的。有时候，我们利用继承可以站在巨人的肩膀上，利用巨人的能力使得自己做的更好。我们用代码来说明:</p>
+<pre><code class="language-python">class SuperMan(object):
+    def see(self):
+        print('I see the darkness')
+class My(SuperMan):
+    def see(self):
+        super().see()
+        print('I saw the light')
+my = My()
+my.see()
+</code></pre>
+<p>运行这个程序，输出结果如下:</p>
+<pre><code>I see the darkness
+I saw the light
+</code></pre>
+<p>SuperMan 拥有一个方法，叫做 see，这个方法输出一句话：I see the darkness(我看透了黑暗)。My 继承了 SuperMan 并且重写了这个 see 的方法，在我这个 see 的方法中，我可以使用 <code>super().see()</code> 这样的语法调用我继承的父类，也就是 SuperMan 的方法，并且输出一句话: I saw the light(我看到了光明)。</p>
+<p>这就是我说的，站在巨人的肩膀上，不光看透了黑暗，还看到了光明。</p>
+<h4 id="重写和super的语法意义">重写和super的语法意义</h4>
+<p>首先重写和 supper 的特性都是基于继承的。</p>
+<p>重写的意义在于，如果子类和父类都具有相同的一个方法，那么子类的方法会重写父类，换句话说， <strong>子类调用自己的方法的时候，不会去执行父类中的同名方法</strong> 。</p>
+<p>而 super 呢？它的语法意义在于，它可以让子类自己选择是否继承并使用父类的方法，换句话说， <strong>super 这个关键字使得子类可以使用父类的能力，并且做更多的事情</strong> 。</p>
+<h4 id="多重继承">多重继承</h4>
+<p>在现实的生活中，多重继承是在正常不过的行为。比如我爸妈生了我，我继承了我爸妈各自的部分基因。</p>
+<p>但是，现在大多数实现了面向对象思想的编程语言都放弃实现多重继承的特性，比如 Java、PHP 都不支持多重继承。</p>
+<p>Python 是支持多重继承的，但大多数的人都认为要避免使用多重继承，因为这比较麻烦。举个例子，你同时继承了你妈妈的个性和你爸爸的个性，而你自己有没有衍生出自己的个性，那么你以谁的个性为准？是爸爸的，还是妈妈的？</p>
+<p><strong>所以，在实际的编程中，也无需使用多重继承，至于其语法，不了解也没有关系。</strong></p>
+<h4 id="总结">总结</h4>
+<p>继承是为了代码的复用，而重写是为了复用的同时不影响子类自己的发展，而 super 则是允许子类在自己选择是否保留父类的能力，还能展现自己的个性 。</p>
+<h3 id="魔法方法special-method">魔法方法(Special Method)</h3>
+<p>魔法方法，这个名字有两个词语组成，分别是魔法和方法。</p>
+<blockquote>
+<p>有的人会称之为魔法函数，这是不准确的。因为函数是定义在类之外的，而魔法方法只能是定义在类当中的。在 Python 的官方文档中，写的是 Special Method (其日文是 特殊メソッド)，不是 Special Function, 所以应该翻译成魔法方法，而不是魔法函数。</p>
+</blockquote>
+<p>什么是魔法？魔法就是一些看上去很神奇的操作或事情，换句话说就是普通函数无法实现的能力。在对象中定义的函数称之为方法，而魔法方法一定是定义在对象中的。</p>
+<p>其实魔法方法，还具有一个特性： <strong>不需要我们在代码中主动的调用，而是在某些特定时刻由 Python 解释器调用的方法</strong> 。上面的例子中的 <code>__init__</code> 即使如此。</p>
+<pre><code class="language-python">class Person(Object):
+    def __init__(self, name):
+        self.name = name
+</code></pre>
+<p>然后当我们实例化这个对象的时候，这个 <code>__init__</code> 就会自动执行，为 <code>self.name</code> 赋值。</p>
+<p>然后再举一个魔法方法的例子:</p>
+<pre><code class="language-python">class Person(Object):
+    def __init__(self, name):
+        self.name = name
+    def __repl(self, name):
+        return &quot;My name is &quot; + self.name
+</code></pre>
+<p>当我们打印这个类的实例化对象的时候，就会自动执行 <code>__repl__</code> 魔法方法，并输出 <code>My name is ......</code>:</p>
+<pre><code class="language-python">p = Person('admin')
+print(p)  ## My name is admin
+</code></pre>
+<p>国内是翻译成魔法方法，但是其日文是 <strong>特殊メソッド</strong> , 翻译成中文是 <strong>特殊方法</strong> ，而翻译成魔法方法不是非常好理解。说是特殊方法比较好理解，特殊在哪里呢？</p>
+<ul>
+<li>必须出现在类当中，方法名以双下划线开头，以双下划线结尾</li>
+<li>无需手动调用，由 Python 解释器在特定的时机去调用</li>
+<li>实现特定的功能，比如因为 <code>__init__</code> 在对象被实例化的时候被执行，所以非常适合做一些初始化属性的事情</li>
+</ul>
+<p>Python 中由很多类似的魔法方法，无需一次性记住，但是需要知道其原理以及应用。在其他的弱类型语言，比如 PHP 中，也有类似的实现。这样的实现是为了增加代码的灵活性。</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[冠状病毒在蔓延]]></title>
         <id>https://blog.hacking.icu/post/guan-zhuang-bing-du-zai-man-yan/</id>
         <link href="https://blog.hacking.icu/post/guan-zhuang-bing-du-zai-man-yan/">
@@ -158,21 +426,6 @@
 <p>而政客和媒体，其实别无办法，他们同样在混乱中不断获取他们所需的养分或是素材，没有人能阻止他们损人利己性的成长。</p>
 <p>关于暴力，无论是警察或者勇武者都应该明白这解决不了问题。也许警察可以驱散人群，但是解决不了政治问题。也许勇武者可以博得各种媒体版面，政治支持，但是没办法迫使北京更多让步。即行为和目的不一致。何况，警察的暴力会成为政客媒体声讨的焦点，而勇武者的暴力会给北京政府在外交中以把柄和口实。</p>
 <p>所以，双方退一步，即使不会海阔天空，也可以谋定而后动。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[台湾的转型正义和间谍]]></title>
-        <id>https://blog.hacking.icu/post/tai-wan-de-zhuan-xing-zheng-yi-he-jian-die/</id>
-        <link href="https://blog.hacking.icu/post/tai-wan-de-zhuan-xing-zheng-yi-he-jian-die/">
-        </link>
-        <updated>2018-09-16T04:52:38.000Z</updated>
-        <content type="html"><![CDATA[<p>说两个关键词：转型正义和间谍。看上去没什么关联。</p>
-<p>促转会爆出音频，称呼自己是东厂，说要操作选举打击政敌。不论蓝绿都不能否认，这样的言论不是转型正义。但是爆料人却离职了，那个坚持正义的人离职了。同时遭受到了众人的谴责。</p>
-<p>有些事情惊人的相似。有些人指责爆料的吴佩蓉，说你反对没关系，不要公开，我们内部讨论。这样的话语让我想到了共产党常说的，大意是开会的时候不说，会后乱说。对内不说，对外胡说。</p>
-<p>有个大律师发文说民进党要严惩吴佩蓉，泄露了机密。可不是吗？可不就是机密吗？凡此种种，让我觉得民进党的基因和共产党很相似，可能这还高抬了民进党。</p>
-<p>说完了转型正义，再来谈谈央视曝光了破获摆起台湾间谍案。晚上看到陆委会发布了申明，说什么子虚乌有。这个我可以理解，那个政府会承认自己有间谍行为呢？可是哪个政府又不设立情报部门呢？还记得不久前台湾政府破获了共谍案，抓了一交流生。</p>
-<p>间谍也好转型正义也好，大致都是一种工具，了解对手或打击对手的工具。今天如果坚持国民党执政，八成也类似操作。兵法总是讲究出师有名，所以就有了欲加之罪。周武王伐纣，形容纣王罄竹难书，现激起民愤，然挥师伐纣。目光从殷商专项伊拉克，美军先是宣布有可靠证据证明萨达姆政权研制核武器，然后一个个国家陷入动荡，战乱。在看叙利亚，反抗军想要抵挡政府军，最好的方法是什么？就是指责对方使用化学武器。以至于现在，政府军在攻击之前先行宣布反对派准备炮制化武攻击以栽赃政府军。凡此种种，何来民主与人权？不过是打击对手的工具罢了。这种时候我更相信共产党常说的，没有主权，就没有人权。</p>
-<p>一向我热衷于政治，我也期望能够看到清明的政治景象。但只能说这是遥远的理想。不论是两岸的这头还是那头。政治人物们睁着眼讲瞎话，政党之间明争暗斗，凡此种种民不聊生。正反为证，当双方的形式此消彼长的时候，便会失去平衡。回到台湾当下的政治现状，国民党是扶不起的阿斗，是穷途末路。民进党的二次执政是最高潮也是走向落寞的开始。渐渐觉得，两党应该合作，因为最大的敌人是北京政府。但是即使是合作，也改变不了什么，台湾太小，政治势力太弱。至于现在，大家都在自欺欺人罢了。</p>
 ]]></content>
     </entry>
 </feed>
