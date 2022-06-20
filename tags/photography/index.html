@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>苏近之的博客</title>
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    // });
+  </script>
+
+
+
+
+  <meta name="description" content="在图像里寻找自我，在代码里发现自由。">
+  <link rel="canonical" href="">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-2">
+        <div class="my-24">
+          <h1 class="text-3xl py-4">摄影</h1>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="w-full relative bg-white py-16">
+      <div class="max-w-2xl mx-auto">
+        <!-- <div class="text-gray-400 font-light mb-8 text-center">在图像里寻找自我，在代码里发现自由。</div> -->
+        <div>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.16</div>
+      <a href="https://blog.hacking.icu/hu-xue-yan-gu-ju-zhi-hu-xue-yan" class="post-item"><h2 class="text-2xl post-title leading-tight">胡雪岩故居之胡雪岩</h2></a>
+      <div class="mt-4">我去过多次胡雪岩故居，对于故居确实喜欢，这也源于我对古建筑的喜爱。因此，我对它的了解也不局限于走马观花到此一游，更是深入其历史背景以及古建筑营建修复。也因此，这篇文章是这一系列文章的起始。希望通过这一系列文章，和大家介绍胡雪岩故居，充当一次导游的角色。也能融入自己拍摄的一些照片，经由遗存的古建延伸的一些想法。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.13</div>
+      <a href="https://blog.hacking.icu/cheng-shuang-cheng-dui" class="post-item"><h2 class="text-2xl post-title leading-tight">成双成对</h2></a>
+      <div class="mt-4">走在路上，不能总是低着头，捡不到钱不说，还可能会错过很多“成双成对”的风景，生活也可能会少很多乐趣。是的，有些“低级趣味”还是很重要的，所以这一篇我专门挑了几张有趣的成对的照片来说说。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.11</div>
+      <a href="https://blog.hacking.icu/all-those-years-of-flowers" class="post-item"><h2 class="text-2xl post-title leading-tight">那年那花</h2></a>
+      <div class="mt-4">今年早早的就闻到了西湖边太子湾公园里的“花香”，从各个公众号的推文中传来。赏花的人太多，还需要预约。我也预约了，但是因为其他的事情耽搁了，至今没有成行。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.11</div>
+      <a href="https://blog.hacking.icu/to-hangzhou-west-stream-wetland-tourist-attraction-with-friend" class="post-item"><h2 class="text-2xl post-title leading-tight">与好友游西溪</h2></a>
+      <div class="mt-4">工作后，大家的距离也都越来越远。家如果住的远一点，一年能见上一面都不是那么容易的事情。很开心今天和一多年的好朋友一起吃了饭游了西溪。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.08</div>
+      <a href="https://blog.hacking.icu/chinese-taipei" class="post-item"><h2 class="text-2xl post-title leading-tight">台湾印象</h2></a>
+      <div class="mt-4">这篇文章来谈谈我对台湾的印象，也是非常浅的印象。尽管这些年我一直在关注、了解台湾的政治、局势、时事。但一篇文章、三言两语、五六张图片是说不清道不明的，只是闲谈一二而已。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.04</div>
+      <a href="https://blog.hacking.icu/qing-ming-shi-jie-yu-fen-fen" class="post-item"><h2 class="text-2xl post-title leading-tight">清明时节雨纷纷</h2></a>
+      <div class="mt-4">一路上，遇到的是形形色色的人，有的喜欢，有的不喜欢。但我都应该抱着感恩之心去对待每一个遇到的人。而我的镜头总是会对准那些我喜欢的人，记录下他们，放在心里。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.03</div>
+      <a href="https://blog.hacking.icu/like_a_child" class="post-item"><h2 class="text-2xl post-title leading-tight">你像个孩子似的</h2></a>
+      <div class="mt-4">最近和一个朋友打趣，我说你有两个宝宝，我比你多多了，我养了一堆蚕宝宝。可当我妈听说我养蚕的时候，她却说我傻了。  也许在父母眼中，孩子就是永远长不大的吧。但凡有这个可能，我也不想长大呀。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.02</div>
+      <a href="https://blog.hacking.icu/xue-dou-shan-zhi-xing" class="post-item"><h2 class="text-2xl post-title leading-tight">雪窦山之行</h2></a>
+      <div class="mt-4">长年都把时间投入到了工作中，总想着能做出一点成绩，获取一些成就，体现自己的价值。成绩也好，成就也好，进而达成的价值也罢，其实都是外在的，多半是为了满足别人的眼光。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.01</div>
+      <a href="https://blog.hacking.icu/men-li-men-wai" class="post-item"><h2 class="text-2xl post-title leading-tight">门里门外</h2></a>
+      <div class="mt-4">门给人的是一种封闭的感觉，现代人常说的门禁就是这个意思：门者，拒止也。门似乎又能给人一种安全感，它和墙组合在一起，营造出内部的小世界。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.03.31</div>
+      <a href="https://blog.hacking.icu/zai-dao-ying-zhong-kan-dao-zi-ji" class="post-item"><h2 class="text-2xl post-title leading-tight">在倒影中看到自己</h2></a>
+      <div class="mt-4">我喜欢拍各种倒影，然后把照片放正。倒影介于虚实之间，可望而不可及，又真真切切地看在眼里。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.03.31</div>
+      <a href="https://blog.hacking.icu/shou-ji-jing-tou-zhong-de-sheng-huo" class="post-item"><h2 class="text-2xl post-title leading-tight">手机镜头中的生活</h2></a>
+      <div class="mt-4">记得初中的时候，一段时间我做梦都想买一个手机，因为手机可以玩游戏、拍照。买不起手机，就买一个mp4，好一点的 mp4也可以用来拍照。我热衷于去记录生活。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.03.30</div>
+      <a href="https://blog.hacking.icu/ai-die-shuo" class="post-item"><h2 class="text-2xl post-title leading-tight">爱碟说</h2></a>
+      <div class="mt-4">宁可枝头抱香死，可曾吹落北风中？</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.03.29</div>
+      <a href="https://blog.hacking.icu/yu-jian-ni-shi-bu-shi-qiao-he" class="post-item"><h2 class="text-2xl post-title leading-tight">遇见你是不是巧合</h2></a>
+      <div class="mt-4">常听人说，命里有时终须有，命里无时莫强求。可是，不去尝试不去求，怎知有没有？拿起相机，随后的事情很多都是不可知的，是需要努力的，也是需要一些些巧合的。
+
+这张照片叫做鸳鸯戏水好不好？它们生活在水里，好喜欢水，我感觉它们对水才是真爱。
+
+并不...</div>
+    </article>
+  
+</div>
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  
+    
+  
+</body>
+</html>

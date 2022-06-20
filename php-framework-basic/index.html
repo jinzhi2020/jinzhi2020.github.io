@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>PHP 框架编写基础 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/fH6zDSU_H');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/fH6zDSU_H',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="我刚开始学会使用框架的时候，我就很好奇框架是如何写出来的。我就问一个技术大牛，如何写一个框架。他只对我说了一句话：你去写。嗯嗯，是的，尝试去做永远是最正确的事情。在开始编写一个框架之前，我们也需要了解一些基础知识，虽然这些内容在平时使用框架的时候可能并不需要在意，确是一个框架的基础。">
+
+  <meta property="og:title" content="PHP 框架编写基础 - 苏近之的博客">
+  <meta property="og:description" content="我刚开始学会使用框架的时候，我就很好奇框架是如何写出来的。我就问一个技术大牛，如何写一个框架。他只对我说了一句话：你去写。嗯嗯，是的，尝试去做永远是最正确的事情。在开始编写一个框架之前，我们也需要了解一些基础知识，虽然这些内容在平时使用框架的时候可能并不需要在意，确是一个框架的基础。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/php-framework-basic/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="PHP 框架编写基础">
+
+  <meta name="gridea:post_id" content="fH6zDSU_H">
+
+  <link rel="canonical" href="https://blog.hacking.icu/php-framework-basic">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">PHP 框架编写基础</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.23</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+              <a href="https://blog.hacking.icu/tags/php" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>PHP
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>我刚开始学会使用框架的时候，我就很好奇框架是如何写出来的。我就问一个技术大牛，如何写一个框架。他只对我说了一句话：你去写。嗯嗯，是的，尝试去做永远是最正确的事情。在开始编写一个框架之前，我们也需要了解一些基础知识，虽然这些内容在平时使用框架的时候可能并不需要在意，确是一个框架的基础。</p>
+<h3 id="文件引入require-and-include">文件引入（Require And Include）</h3>
+<p>计算机领域中最核心的思想概念就是分而治之，分层分模块。换句话说就是将代码划分到不同的文件中，你难以想象一个代码文件中有成千上万行代码，如何阅读？如何维护？所以，真实的项目中，我们会将代码划分在不同的文件中，每个文件中不同的存放相同的代码。</p>
+<p>那么在 PHP 中，如何引入其他文件中的代码呢？有两组四个语句: require 和 require_once ， include 和 include_once 。它们之间有什么区别呢？</p>
+<p>• require 和 include 的区别在于主要在于对待错误的不同态度：<br>
+• require 如果引入的文件中存在错误，则会停止执行剩下的程序<br>
+• include 如果引入的文件中存在错误，则会继续执行剩下的程序<br>
+• 所以，优先使用 require<br>
+• require_once 和 include_once 中的 once 指的是相同的文件只会引入一次，而不会重复引入，优先使用 require_once ,而不是使用 require 。</p>
+<p>示例代码如下:</p>
+<pre><code>&lt;?php
+require_once &quot;/path/filename&quot;;
+</code></pre>
+<blockquote>
+<p>本质上，引入文件就是执行文件中的所有代码。</p>
+</blockquote>
+<h3 id="命名空间namespace">命名空间（Namespace）</h3>
+<p>很多语言中都存在命名空间的概念，作用是类似的，就是为了防止程序中的实体（变量、函数、类）重名。你可能会奇怪，代码都是我们自己写的，怎么会重名呢？换一个名字不就好了吗？不是的，真实的项目中都是团队协作，而且我们还引入了大量的第三方代码库，难以保证不重名。</p>
+<p>我们来看下面的代码，这个是一个错误的示例:</p>
+<pre><code class="language-php">&lt;?php
+class Person {}
+class Person {}     
+// 执行代码会给出 “Fatal error: Cannot declare class Person, because the name is already in use in /Volumes/project/demo/mantu-/project/test.php on line 4” 的错误，意思就是重复定义了同名的类
+</code></pre>
+<p>这就说明类是不能够重复定义的，但是我们可以给 类加上前缀 ，比如在一个年级段中如果有人重名，我们就会说某某班级某某人，当中某某班级就是前缀，用作区分不同的人。比如说我的老家所在的村子叫做新坊村，在全国一共有九个同名的存在。所以当我们在国内说起这个地名的时候，就需要加上前缀，比如说，温州市永嘉县枫林镇新坊村，或者福建上杭县旧县乡新坊村。这样的例子在生活中比比皆是。</p>
+<p>不同的语言对命名空间的实现是不一样的，比如在 Java 中是以目录层级为命名空间的，但是 在 PHP 中，命名空间从语法层面上来说是和目录层级无关的 。</p>
+<p>我们来处理上面这个错误的例子：</p>
+<pre><code class="language-php">&lt;?php
+namespace HangZhou;
+class Person {}
+echo Person::class . PHP_EOL;   // 输出: HangZhou\Person
+namespace ShangHai;
+class Person {}
+echo Person::class . PHP_EOL;   // 输出: ShangHai\Person
+</code></pre>
+<p>从上面的例子中可以看到，我们使用 echo 输出的类名。完整的类名实际上是“命名空间+类名”，这样不同的人、不同的团队、不同的项目都会使用命名空间来区分名称。这样我们就不会重名了。</p>
+<p>在 PHP 中，提供了 use 来简化命名空间的编写：</p>
+<pre><code class="language-php">&lt;?php
+namespace HangZhou\Person;
+class Bob{}
+class Tom{}
+class John{}
+namespace Workspace;
+use HangZhou\Person\Bob;
+$bob = new Bob;
+</code></pre>
+<p>如果我们要引入多个相同命令空间的类呢？可以有两种写法，第一种如下：</p>
+<pre><code class="language-php">&lt;?php
+namespace Workspace;
+use HangZhou\Person\Bob;
+use HangZhou\Person\Tom;
+use HangZhou\Person\John;
+</code></pre>
+<p>上面的写法也可以简化成为一行代码，如下:</p>
+<pre><code class="language-php">&lt;?php
+namespace Workspace;
+use HangZhou\Person\{Bob, Tom, John};       // 很明显，这种写法更加的简洁
+</code></pre>
+<p>如果引入不同的命名空间的相同名称的类，也会发生重名，这时候我们可以采用 as 关键字给引入的类名设定别名（Alias）：</p>
+<pre><code class="language-php">&lt;?php
+namespace ShangHai;
+class Tom {}
+namespace HangZhou;
+class Tom{}
+namespace Workspace;
+use ShangHai\Tom as ShangHaiTom;
+use HangZhou\Tom as HangZhouTom;
+</code></pre>
+<p>所有的实体，都有命名空间。如果没有特殊声明，那么命名空间就是 \ ，所有声明了命名空间的实体，也是以 \ 开始的，只是这个根命名空间可以省略。比如上面例子中的 ShangHai\Tom 实际上完整的写法是 \ShangHai\Tom ，这个和 Linux 下的目录是类似的，都是从根（root）开始的。</p>
+<h3 id="类的自动加载class-autoload">类的自动加载（Class Autoload)</h3>
+<p>前面我们已经铺垫了文件引入以及命名空间的概念，在这个基础上，我们还需要引入一个新的概念，叫做类的自动加载。我们来思考一个问题，在真实的项目中，可能会有成百上千的代码文件，这些代码文件难道都需要用如下的方式手动引入吗？</p>
+<pre><code class="language-php">&lt;?php
+require_once '/path/file1.php';
+require_once '/path/file2.php';
+require_once '/path/filen.php';
+</code></pre>
+<p>估计你这个代码要写到手残，所以我们肯定有更高级的做法，我们可以向 PHP 注册一个函数，当类没有找到的时候，PHP 会主动执行这个函数去自动引入这个类所在的代码文件。如下示例:</p>
+<pre><code class="language-php">&lt;?php
+// 注册一个匿名函数，然后在这个函数中引入文件
+spl_autoload_register(function () {
+    require_once 'file1.php';
+    require_once 'file2.php';
+    require_once 'filen.php';
+});
+// 假设这个类写在 file1.php 中，PHP 根本不知道 Bob 在那个文件里，但是我们事先注册了匿名函数，所以 PHP 会先去执行那个匿名函数，引入了我们的`file1.php`，所以 PHP 也知道了 Bob 这个类所在的文件
+$bob = new Bob();       
+$bob = new John();       // 假设这个类写在 file2.php 中，和 file1.php 同理
+</code></pre>
+<p>你看了这个代码，估计会觉得奇怪，使用 spl_autoload_register 注册一个函数，在注册的函数中我们仍旧要一行行的导入文件啊。对的，但是仔细观察，其实命名空间路径很像，只是文件路径使用 / ，而命名空间使用 \ 。所以，如果我们的命名空间和文件路径保持一致，是不是就可以根据命名空间来找到文件所在的路径了？是的，我们来写写看:</p>
+<pre><code class="language-php">&lt;?php
+spl_autoload_register(function ($class) {
+    // 把命名空间中的`\`替换成`/`，然后拼接上文件后缀`.php`就成了文件的路径了。
+    require_once str_replace('\\', '/', $class) . '.php';
+});
+</code></pre>
+<p>只要所有的类都按照这个规范来编写，我们就可以事先类的自动加载了。比如:</p>
+<pre><code>&lt;?php
+use App\Controller\Users\Bob;  // 这个类在`App/Controller/Users/Bob.php`文件中
+use App\Service\Coupon;             // 这个类在`App/Service/Coupon.php` 文件中
+</code></pre>
+<h3 id="异常和错误处理exception-and-error">异常和错误处理（Exception And Error）</h3>
+<p>在 PHP 中，大部分的都是异常，可以使用 try...catch... 进行捕获，但有些是错误，比如说语法错误、除数为 0 等。我们需要对程序中的异常和错误进行处理，处理的方法和类的自动加载非常相似:</p>
+<pre><code class="language-php">&lt;?php
+set_exception_handler(function (Exception $exception) {
+    // 发送了错误进行处理
+    header('Content-Type:application/json');
+    // 将异常转换为 json 返回给调用方
+    echo json_encode([
+        'message' =&gt; $exception-&gt;getMessage(),
+        'code' =&gt; $exception-&gt;getCode(),
+    ]);
+    die();      // 终止程序执行
+});
+</code></pre>
+<p>错误处理也是一样的，只是使用 set_error_handler 函数进行注册。</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2022.06.14</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%BC%95%E5%85%A5require-and-include">文件引入（Require And Include）</a></li>
+<li><a href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4namespace">命名空间（Namespace）</a></li>
+<li><a href="#%E7%B1%BB%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BDclass-autoload">类的自动加载（Class Autoload)</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%92%8C%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86exception-and-error">异常和错误处理（Exception And Error）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

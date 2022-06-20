@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>你像个孩子似的 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/9qvF89sYo');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/9qvF89sYo',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="最近和一个朋友打趣，我说你有两个宝宝，我比你多多了，我养了一堆蚕宝宝。可当我妈听说我养蚕的时候，她却说我傻了。  也许在父母眼中，孩子就是永远长不大的吧。但凡有这个可能，我也不想长大呀。">
+
+  <meta property="og:title" content="你像个孩子似的 - 苏近之的博客">
+  <meta property="og:description" content="最近和一个朋友打趣，我说你有两个宝宝，我比你多多了，我养了一堆蚕宝宝。可当我妈听说我养蚕的时候，她却说我傻了。  也许在父母眼中，孩子就是永远长不大的吧。但凡有这个可能，我也不想长大呀。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/like_a_child/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="你像个孩子似的">
+
+  <meta name="gridea:post_id" content="9qvF89sYo">
+
+  <link rel="canonical" href="https://blog.hacking.icu/like_a_child">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">你像个孩子似的</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.03</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/photography" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>摄影
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>最近和一个朋友打趣，我说你有两个宝宝，我比你多多了，我养了一堆蚕宝宝。可当我妈听说我养蚕的时候，她却说我傻了。</p>
+<p>也许在父母眼中，孩子就是永远长不大的吧。但凡有这个可能，我也不想长大呀。</p>
+<p><img src="https://files.dev-test.cn/20210403113259.jpg" alt="" loading="lazy"></p>
+<p>这张照片拍摄于高铁上，这个孩子和他的妈妈就坐在我的前排。他的眼睛是那么明亮，放着光。他的眼里充满了好奇。</p>
+<p>孩子是不能在家里“圈养”的，他应该被允许去看看外面的世界，虽然这个世界并不干净，有些地方也不太平，但为了满足它们的好奇，受一点伤也是值得。</p>
+<p><img src="https://files.dev-test.cn/IMG_4418.JPG" alt="" loading="lazy"></p>
+<p>在一个村子里，我遇见了一对母女。年轻的妈妈陪着孩子玩耍，看到我手里拿着相机，希望我能帮她拍一张照片。后来，我要了孩子妈妈的微信，把照片发给了她。</p>
+<p>在旅途中，我会尽可能征求陌生人的同意，帮他们拍下照片，然后通过微信发给他们，留作纪念。几乎每一个人都会同意，相信我的善意。</p>
+<p><img src="https://files.dev-test.cn/IMG_4906.jpg" alt="" loading="lazy"></p>
+<p>照片里应该姐姐带着妹妹来看音乐节？我不知道，但是这个女孩好乖，这时候还不忘记写作业。事后，我加了这个这个姐姐的微信，我把这张照片发给了她。朋友圈里看到的，她那时候应该就在附近的传化公司上班，现在也应该有了自己的孩子吧。</p>
+<p><img src="https://files.dev-test.cn/IMG_5041.jpg" alt="" loading="lazy"></p>
+<p>这是一对母女吧，虽然天色已晚，但妈妈陪着孩子到外面写生作画。妈妈在一边拍摄荷花，女儿也认真地观察着，画着。</p>
+<p>我们常说爱美是女孩的天性，可是发现是美的能力是需要培养的。</p>
+<p><img src="https://files.dev-test.cn/IMG_9054.jpg" alt="" loading="lazy"></p>
+<p>这张照片拍摄于萧山，我和他隔着一条河。有一位先生看着我拿着相机，误以为我是记者，主动和我聊起来。站在河边，我们聊了很久。</p>
+<p>这位先生是土生土长的本地人，他说这条河在他小时候是非常干净的，后来进驻了很多化工企业，就慢慢的被污染了。</p>
+<p><img src="https://files.dev-test.cn/IMG_9048.jpg" alt="" loading="lazy"></p>
+<p>河的对面的简易房中住的都是一些外地人，在附近的化工厂做工，很多人因此生了病，甚至是癌症。</p>
+<p>照片中的这个孩子，就是他们的孩子。家里也许没有电视，更不会有游戏机电脑，父母的收入也微薄。他就一个人坐在电瓶车上孤单地玩着。</p>
+<p>告别了那位先生，回去的步伐明显沉重了很多。社会的发展，是不是注定了要牺牲一部分人？是不是可以给孩子留一块净土？</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.04.03</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

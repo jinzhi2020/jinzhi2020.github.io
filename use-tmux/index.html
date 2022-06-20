@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>使用 tmux - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/9qCJWUU88');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/9qCJWUU88',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="使用 Linux，我们绝大多数的时候看到的都是黑漆漆的画面，是有一些枯燥的。但是，能不能在枯燥的画面中，玩些花样呢？">
+
+  <meta property="og:title" content="使用 tmux - 苏近之的博客">
+  <meta property="og:description" content="使用 Linux，我们绝大多数的时候看到的都是黑漆漆的画面，是有一些枯燥的。但是，能不能在枯燥的画面中，玩些花样呢？">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/use-tmux/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="使用 tmux">
+
+  <meta name="gridea:post_id" content="9qCJWUU88">
+
+  <link rel="canonical" href="https://blog.hacking.icu/use-tmux">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">使用 tmux</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.02</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+              <a href="https://blog.hacking.icu/tags/linux" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>Linux
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>使用 Linux，我们绝大多数的时候看到的都是黑漆漆的画面，是有一些枯燥的。但是，能不能在枯燥的画面中，玩些花样呢？</p>
+<p>比如说，我们模拟一个多窗口的环境，可以再多个窗口之间切换。再比如说，模拟一个多桌面的环境，不同的桌面包含不同的窗口。</p>
+<p>要实现上面这些功能，我们就需要清楚这篇文章的主角了 —— tmnx。</p>
+<h3 id="安装-tmux">安装 tmux</h3>
+<p>如果是 CentOS:</p>
+<pre><code class="language-shell">$ sudo dnf install tmux # CenOS7 使用 yum
+</code></pre>
+<p>如果是 macOS:</p>
+<pre><code class="language-shell">$ brew install tmux
+</code></pre>
+<h3 id="创建和销毁会话">创建和销毁会话</h3>
+<p>在 tmux 中，有一个 Session 的概念，和桌面是一样的意思。一个 Session 可以包含多个窗口( Window ）。如何创建 Session 呢？</p>
+<pre><code class="language-shell">$ tmux new -s &lt;Session Name&gt;
+</code></pre>
+<p>查看已经创建的 Session:</p>
+<pre><code class="language-shell">$ tmux ls
+</code></pre>
+<p>进入已经创建的 Session:</p>
+<pre><code class="language-shell">$ tmux a -t &lt;Session Name&gt;
+</code></pre>
+<p>如果要临时退出会话, 使用 <code>ctrl+b</code> ，然后按下 <code>d</code> 。如果要销毁会话，使用 <code>ctrl+b</code> ，然后按下 : 进入命令模式，输入命令: <code>kill-session</code> 。</p>
+<h3 id="tab-栏的使用">Tab 栏的使用</h3>
+<p>窗口是基于 Session 的，所以需要先进入一个 Session。然后创建窗口，需要使用 <code>Ctrl + b</code> , 然后按下  <code>c</code> 键:</p>
+<p><img src="https://files.dev-test.cn/20210402234024.png" alt="" loading="lazy"></p>
+<p>我们看到下面显示着一行绿色的状态栏，内容如下:</p>
+<p><img src="https://files.dev-test.cn/20210402234050.png" alt="" loading="lazy"></p>
+<h3 id="plane-面板的使用">Plane 面板的使用</h3>
+<p>下表展示了一些常用的场景以及对应的面板的操作：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面板切换</td>
+<td><code>CTRL + B</code>, <code>CTRL + o</code>，注意, <code>o</code> 要快速按下并释放</td>
+</tr>
+<tr>
+<td>面板排序</td>
+<td><code>CTRL + B</code>, <code>CTRL + o</code>, 注意，<code>o</code> 要长按一小会</td>
+</tr>
+<tr>
+<td>面板全屏</td>
+<td><code>CTRL + B</code> ,<code>CTRL + z</code></td>
+</tr>
+<tr>
+<td>面板调整大小</td>
+<td><code>CTRL + B</code>, <code>ALT + &lt;方向键&gt;</code></td>
+</tr>
+<tr>
+<td>创建水平面板</td>
+<td><code>CTRL + B</code>，然后按下 <code>&quot;</code></td>
+</tr>
+<tr>
+<td>创建垂直面板</td>
+<td><code>CTRL + B</code>，然后按下 <code>%</code></td>
+</tr>
+<tr>
+<td>水平面板和垂直面板相互切换</td>
+<td><code>CTRL + B</code>, 然后按下空格键</td>
+</tr>
+</tbody>
+</table>
+<p>这里要注意面板的切换和面板的排序，按键都是一样的。区别时按下 <code>o</code> 键时候的时间长短，经常会因为动作的延迟将面板切换操作成面板排序......</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.04.02</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-tmux">安装 tmux</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E9%94%80%E6%AF%81%E4%BC%9A%E8%AF%9D">创建和销毁会话</a></li>
+<li><a href="#tab-%E6%A0%8F%E7%9A%84%E4%BD%BF%E7%94%A8">Tab 栏的使用</a></li>
+<li><a href="#plane-%E9%9D%A2%E6%9D%BF%E7%9A%84%E4%BD%BF%E7%94%A8">Plane 面板的使用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

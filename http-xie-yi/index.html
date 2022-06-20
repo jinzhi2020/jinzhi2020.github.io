@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>HTTP 协议 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/-qu_F9wPw');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/-qu_F9wPw',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="从这一篇文档开始，我们来说说 HTTP 协议，因为这是当前计算机网络中距离我们生活最近的协议，每天都用到的协议，也是相对比较简单的协议。">
+
+  <meta property="og:title" content="HTTP 协议 - 苏近之的博客">
+  <meta property="og:description" content="从这一篇文档开始，我们来说说 HTTP 协议，因为这是当前计算机网络中距离我们生活最近的协议，每天都用到的协议，也是相对比较简单的协议。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/http-xie-yi/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="HTTP 协议">
+
+  <meta name="gridea:post_id" content="-qu_F9wPw">
+
+  <link rel="canonical" href="https://blog.hacking.icu/http-xie-yi">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">HTTP 协议</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.04</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>从这一篇文档开始，我们来说说 HTTP 协议，因为这是当前计算机网络中距离我们生活最近的协议，每天都用到的协议，也是相对比较简单的协议。</p>
+<h3 id="什么是协议">什么是协议</h3>
+<p>在说 HTTP 协议之前，我们先要说明<strong>什么是协议？一纸文本而已</strong>，和我们日常生活中各种协议(例如借款协议)没有任何区别。所以，不要把计算机协议当成很是很晦涩的概念。</p>
+<p>为什么很多人会觉得计算机协议很晦涩难懂呢？因为这所谓的一纸协议是使用 English 编写的，而且出于协议的严谨性，用语都不容易理解，在很多时候还会出现语意的分歧。</p>
+<p>另外，虽然协议只是一纸文本，但某些协议涉及的计算机概念却非常底层，难懂。<strong>但就协议本身而言，就一纸文本，没什么好畏惧的。</strong></p>
+<p>顺便说一下，什么是协议簇？把好多相关的协议装订成一本，这就是协议簇。<strong>简单的理解，协议簇就是很多协议。</strong></p>
+<h3 id="协议有什么作用">协议有什么作用</h3>
+<p>从现实生活出发，协议有什么作用？比如说借款协议？那是为了约束借款双方的责任义务的。计算机中的协议也一样，最根本的目的就是为了使用文本来约束协议各方的责任的。</p>
+<p>比如说，我们在访问某个网址的时候，一般不填写 80 端口，浏览器会默认帮我们添加 80 端口，这是为什么呢？因为在协议里规定了这件事情:</p>
+<blockquote>
+<p>If the port is empty or not given, port 80 is assumed.    —— rfc2616#section-3.2</p>
+</blockquote>
+<p>但计算机中的协议和现实生活中的协议在保障实施层面是不太一样的。现实中的大部分协议是由法律保障的，而法律又由国家强制力(警察甚至是军队）作为依托的。 计算机体系中的协议并没有强制约束力，也就是说你大可违反协议，甚至自定义协议内容 。</p>
+<p>在比如说，我们使用不同的浏览器访问同样的网页，经常会出现呈现的网页样式不一致，或者是按钮不可用，或者干脆显示不出来，这是为什么呢？可能有以下这些原因：</p>
+<ol>
+<li>浏览器厂商没有实现 HTTP 协议</li>
+<li>浏览器厂商对 HTTP 协议中的某些文本有不同的解释，导致了不同的实现</li>
+<li>浏览器厂商没有遵守部分 HTTP 协议中的规定，可能是它对协议的这部分规定有所不满</li>
+<li>浏览器的缺陷</li>
+</ol>
+<p><strong>所以我们说，协议是可以违反的， 但也是有后果的</strong>。现实中，你违反了协议，可能收到法院的传票，甚至是被司法机关强制执行。计算机协议中违反了规范，可能可以自成一体形成新的规范(如果你的规范更优秀），也可能你基于自己规范做出的软件件产品会被市场抛弃(你的规范不如别人的规范更合理、更优秀)。</p>
+<p>协议的制定者，你可以是你自己，也可以是软硬件厂商，还有就是一些行业组织或者国际标准组织等。比如我们常说的 5G 通信协议，其实各个大国、大国下的大厂都在努力设计自己的协议，因为协议也是话语权的体现。如果能将自己的协议标准化，那么 5G  相关的软硬件厂商，都会以自己的协议为标准去生产硬件和软件，自己就会有更大的发言权。</p>
+<h3 id="什么是-http-协议">什么是 HTTP 协议</h3>
+<p>HTTP 协议离不开协议的本质，就是一纸文本，文本的截图如下:</p>
+<p><img src="https://files.dev-test.cn/20210404203344.png" alt="" loading="lazy"></p>
+<p>那么协议应该由制定者？HTTP 协议的制定者 IETF（The Internet Engineering Task Force, 国际互联网工程任务组)， 这是一个公开性质的大型民间国际团体，汇聚很多业内学者专家，负责互联网相关标准的制定和研发工作。</p>
+<p>而目前，所有主流的浏览器厂商都支持 HTTP 协议，换句话说，浏览器厂商以 IETF 制定的 HTTP 协议为蓝本去开发自己的浏览器产品，来满足全世界互联网用户浏览器网页的需求。他们会对每个协议对应的版本进行编号，其中 HTTP/1.1 协议的编号为 RFC 2616(版本在更新，编号也会更新)。</p>
+<p>HTTP 也称之为超文本传输协议，这是一个创举。如果说互联网是将一台台计算机通过路由器这类的网络设备连接在了一起，那么 HTTP 协议就是将一个个网络上的资源通过互联网连接在了一起。</p>
+<h3 id="http-协议版本">HTTP 协议版本</h3>
+<p>HTTP 协议支持很多请求方式(专业点说叫做请求谓词，请求动词)，比如说: GET、POST、DELETE、OPTION 等等。但是你知道吗？这是现在的版本所支持, 早期版本并不支持。所以说， HTTP 经过那么多年，也衍生出好几个版本了。如下所示:</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP/0.9</td>
+<td>已经废弃不用了。只支持 GET 方式的请求，不支持 POST 等其他的请求谓词。所以也不能传输很多的数据。</td>
+</tr>
+<tr>
+<td>HTTP/1.0</td>
+<td>这是第一个再通讯中指定版本号的 HTTP 协议版本。引入了 Http Header 的概念。传输也不局限于文本。增加了 HEAD、POST 等方法。</td>
+</tr>
+<tr>
+<td>HTTP/1.1</td>
+<td>这是目前大面积使用的版本。</td>
+</tr>
+<tr>
+<td>HTTP/2.0</td>
+<td>这是目前最新的版本，于 2015 年 5 月发布，逐步替换 HTTP 1.1 版本，应该还需要些年头。</td>
+</tr>
+</tbody>
+</table>
+<p>关于 HTTP/0.9 版本为什么只有 GET 请求呢？受限于当时的网络速度，当初的设想也是将网络上的这些文档作为一种资源共享的方式，都是只读的。而到了现在，随着网络速度的提升、硬件的发展，已经不再局限于只读了，而是近乎实时的交互了。我们可以轻而易举地提交一个表单，发表我们的想法或是一片文章。 <strong>这是一个重要的版本，验证了 Web 服务的可行性</strong> 。</p>
+<p>而 1.0 版本和之后的 1.1 版本已经相差不多了，这得益于在 90年代初 JPEG 格式的图片以及 MP3 格式的音乐的发明。以及 NCSA(美国国家超级计算机应用中心)开发了 Mosaic 浏览器，它可以显示图文的混排。到了 95年又开发出了 Apache Web 服务器，简化了 HTTP 服务器的搭建工作。</p>
+<p>而 1.1 是一个传奇，它延续了十多年，一直到现在。这来源于在九十年代末的浏览器大战，以网景公司的 Netscape Navigator 和微软的 IE 的相互竞争，推动了 Web 的发展。现在 IE 也已经没落了，Chrome 大行其道（市场占有率超过了 60%），而 HTTP/1.1 仍然支撑着这个互联网的繁荣。 HTTP 1.1 增加了以下这些特性:</p>
+<ul>
+<li>增加了 PUT、DELETE 等新的方法</li>
+<li>增加了缓存管理和控制</li>
+<li>明确了连接管理，允许持久连接</li>
+<li>允许响应数据分块，利于传输大文件</li>
+<li>强制要求 Host 头，让互联网主机托管成为可能</li>
+</ul>
+<p>接着是 HTTP/2.0, 这个协议版本的推出是 Google 退出了 Chrome 浏览器并且取得了第二次浏览器大战的胜利，终结了 IE 浏览器。目前微软也放弃了 IE 浏览器，而是使用 Chrome 二次开发了 Edge 浏览器。</p>
+<p>由于 Google Chrome 的胜利，退出了 SPDY 协议。由于 Chrome 庞大的用户群体，互联网标准化组织以 SPDY 为基础开始制定新版本的 HTTP 协议，在 2015 年发布了 HTTP/2。其带来了如下这些变革:</p>
+<ul>
+<li>二进制协议，不再是纯文本</li>
+<li>可发起多个请求，废弃了 HTTP/1.1 里的管道</li>
+<li>使用专用算法压缩头部，减少数据传输量</li>
+<li>允许服务器主动向客户端推送数据</li>
+<li>增强了安全性，要求加密通信</li>
+</ul>
+<h3 id="http-版本号的规定">HTTP 版本号的规定</h3>
+<p>在 HTTP 协议中，规定了其版本号采用了两段式: <code>&lt;主版本号&gt;.&lt;小版本号&gt;</code> 。如果是 HTTP 协议的消息格式都发生了变化，那就会改变主版本号，如果只是新增了一些请求或响应的字段，则只改变小版本号。</p>
+<p><img src="https://files.dev-test.cn/20210404203643.png" alt="" loading="lazy"></p>
+<p>从这一点来看，我们也可以了解到，协议只是一纸文本，规定了一些事项来约束协议参与者的行为，统一标准罢了。</p>
+<h3 id="http-协议的作用">HTTP 协议的作用</h3>
+<p>HTTP 协议采用 C/S 架构，即客户端和服务端架构。由客户端向服务端发送请求，而服务端返回响应。约束了浏览器和服务端(比如 Nginx、Apache 这样实现了 HTTP 协议的应用服务器）之间的行为。比如，传输文本的格式、如何保存用户的状态等。</p>
+<p>HTTP 协议(Hypertext transfer Protocol, 超文本传输协议)。就起作用而言，简单地说就是我们可以通过网页来呈现信息，通过网页中的 超链接 来跳转不同的网页。比如我们这个文档，就是通过网页的形式呈现的，你可以通过这个文档网页上的超链接来跳转到 HTTP 协议的网页: <a href="https://tools.ietf.org/html/rfc2616">RFC 2616 Hypertext transfer Protocal - 1.1</a>.</p>
+<p>所以，我们可以通过 HTTP 协议中的相关定义，生产浏览器软件、应用服务器软件，通过浏览器呈现网页，通过不同的链接来向应用服务器请求不同的资源，<strong>来实现资源的获取，信息的传递</strong>。</p>
+<h3 id="http-协议的更新">HTTP 协议的更新</h3>
+<p>HTTP 协议在不断的更新中，上文中我们引述的资料都是源于 RFC 2616 版本。由于 HTTP/1.1 过于庞大复杂，所以在 2014 年又做了一次修订，原来的 RFC 2616 被拆解成了六份小的文档，优化了细节，编号为 7230-7235。</p>
+<ol>
+<li>RFC 7230 -  <a href="https://tools.ietf.org/html/rfc7230">Message Syntax and routing</a></li>
+<li>RFC 7231 -  <a href="https://tools.ietf.org/html/rfc7231">Semantics and Content</a></li>
+<li>RFC 7232 - <a href="https://tools.ietf.org/html/rfc7232">Conditional Request</a></li>
+<li>RFC 7233 - <a href="https://tools.ietf.org/html/rfc7233">Range Requests</a></li>
+<li>RFC 7234 - <a href="https://tools.ietf.org/html/rfc7234">Caching</a></li>
+<li>RFC 7235 - <a href="https://tools.ietf.org/html/rfc7235">Authentication</a></li>
+</ol>
+<p>2015 年， HTTP/2 发布，协议文档编号为 <a href="https://tools.ietf.org/html/rfc7540">RFC 7540</a>。</p>
+<p>Google 是一家可敬的互联网公司，它并没有止步于自家推出的 HTTP/2，它继续推出了 QUIC 协议，并且在 2018 年获得了 IETF 的承认，并更名为 HTTP/3。目前已经进入到了标准化制定阶段，会在不久的将来推出这一版本。</p>
+<h3 id="总结">总结</h3>
+<p>协议，就是 一纸文本。协议簇，就是很多相关协议的集合。而 HTTP 协议是众多计算机协议中的一个，约定了浏览器和应用服务器之间的行为，比如如何通信、通信的文本格式之类的。</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.04.04</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%8F%E8%AE%AE">什么是协议</a></li>
+<li><a href="#%E5%8D%8F%E8%AE%AE%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8">协议有什么作用</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF-http-%E5%8D%8F%E8%AE%AE">什么是 HTTP 协议</a></li>
+<li><a href="#http-%E5%8D%8F%E8%AE%AE%E7%89%88%E6%9C%AC">HTTP 协议版本</a></li>
+<li><a href="#http-%E7%89%88%E6%9C%AC%E5%8F%B7%E7%9A%84%E8%A7%84%E5%AE%9A">HTTP 版本号的规定</a></li>
+<li><a href="#http-%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%BD%9C%E7%94%A8">HTTP 协议的作用</a></li>
+<li><a href="#http-%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%9B%B4%E6%96%B0">HTTP 协议的更新</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

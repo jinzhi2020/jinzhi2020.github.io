@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>苏近之的博客</title>
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    // });
+  </script>
+
+
+
+
+  <meta name="description" content="在图像里寻找自我，在代码里发现自由。">
+  
+    <meta property="og:image" content="https://files.dev-test.cn/favicon.ico">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:alt" content="苏近之的博客">
+    <!-- 当支持 logo 设置的时候再将备选条件加上 -->
+    <!-- <meta name="twitter:card" content="summary"> -->
+  
+  <meta property="og:title" content="苏近之的博客">
+  <meta property="og:description" content="在图像里寻找自我，在代码里发现自由。">
+  <meta property="og:url" content="https://blog.hacking.icu">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <link rel="canonical" href="https://blog.hacking.icu">
+
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="w-full relative bg-white py-16">
+      <div class="max-w-2xl mx-auto">
+        <div>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.08</div>
+      <a href="https://blog.hacking.icu/hello-world" class="post-item"><h2 class="text-2xl post-title leading-tight">Hello World</h2></a>
+      <div class="mt-4">我们常常开玩笑，说如何评价一个人的编程水平，于是就问他/她: 请问你能用几种语言来编写“Hello World”。这个问题能考验一个人学过几种编程语言，优秀的程序员总是不止会一种编程语言。所以，这一篇文章我们就从 Hello World 说起。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.06</div>
+      <a href="https://blog.hacking.icu/selenium-actions" class="post-item"><h2 class="text-2xl post-title leading-tight">Selenium 常用方法</h2></a>
+      <div class="mt-4">上一篇文档我们讲述了如何在页面中查找定位元素，一共介绍了 8 中方法。在这一篇文档中我们更进一步，掌握操作元素的一些方法。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.06</div>
+      <a href="https://blog.hacking.icu/selenium-element-position" class="post-item"><h2 class="text-2xl post-title leading-tight">Selenium 页面元素定位</h2></a>
+      <div class="mt-4">使用 Selenium 的目的是为了代替测试人员手工的去操作 Web 应用，将手工的操作自动化。在手工操作中，我们可以通过眼睛去看我们的操作元素在页面中的位置，比如说我们在用户名的文本框中输入，那么在页面中你可以看得到。但是如果我们使用程序去操作的话，是不是应该告诉程序如何才能找到我们要操作的元素呢？</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.06</div>
+      <a href="https://blog.hacking.icu/about-selenium" class="post-item"><h2 class="text-2xl post-title leading-tight">Selenium 简介</h2></a>
+      <div class="mt-4">Selenium 是一款非常流行的 GUI 自动化测试工具，学好它成为了一个测试工程师的必备技能。从这一篇文档开始，我们来详细说明其技术细节，以及如何更好地运用于实际。让我们开始吧。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.04</div>
+      <a href="https://blog.hacking.icu/http-xie-yi" class="post-item"><h2 class="text-2xl post-title leading-tight">HTTP 协议</h2></a>
+      <div class="mt-4">从这一篇文档开始，我们来说说 HTTP 协议，因为这是当前计算机网络中距离我们生活最近的协议，每天都用到的协议，也是相对比较简单的协议。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.04</div>
+      <a href="https://blog.hacking.icu/qing-ming-shi-jie-yu-fen-fen" class="post-item"><h2 class="text-2xl post-title leading-tight">清明时节雨纷纷</h2></a>
+      <div class="mt-4">一路上，遇到的是形形色色的人，有的喜欢，有的不喜欢。但我都应该抱着感恩之心去对待每一个遇到的人。而我的镜头总是会对准那些我喜欢的人，记录下他们，放在心里。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.03</div>
+      <a href="https://blog.hacking.icu/like_a_child" class="post-item"><h2 class="text-2xl post-title leading-tight">你像个孩子似的</h2></a>
+      <div class="mt-4">最近和一个朋友打趣，我说你有两个宝宝，我比你多多了，我养了一堆蚕宝宝。可当我妈听说我养蚕的时候，她却说我傻了。  也许在父母眼中，孩子就是永远长不大的吧。但凡有这个可能，我也不想长大呀。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.02</div>
+      <a href="https://blog.hacking.icu/use-tmux" class="post-item"><h2 class="text-2xl post-title leading-tight">使用 tmux</h2></a>
+      <div class="mt-4">使用 Linux，我们绝大多数的时候看到的都是黑漆漆的画面，是有一些枯燥的。但是，能不能在枯燥的画面中，玩些花样呢？</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.02</div>
+      <a href="https://blog.hacking.icu/shi-yong-vim" class="post-item"><h2 class="text-2xl post-title leading-tight">使用 Vim</h2></a>
+      <div class="mt-4">对于我个人而言，非常喜欢使用 Vim。喜欢到什么程度呢？如果没有 Vim，我就不想写代码。这一篇文档描述了 Vim 的一些基本用法，掌握这些内容，基本上就可以在各种环境下使用 Vim 了。</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.04.02</div>
+      <a href="https://blog.hacking.icu/xue-dou-shan-zhi-xing" class="post-item"><h2 class="text-2xl post-title leading-tight">雪窦山之行</h2></a>
+      <div class="mt-4">长年都把时间投入到了工作中，总想着能做出一点成绩，获取一些成就，体现自己的价值。成绩也好，成就也好，进而达成的价值也罢，其实都是外在的，多半是为了满足别人的眼光。</div>
+    </article>
+  
+</div>
+        <div class="px-2 flex justify-between">
+          
+            <a href="/page/3/" class="border-b border-transparent hover:border-black">上一页</a>
+          
+          
+            <a href="/page/5/" class="border-b border-transparent hover:border-black">下一页</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  
+    
+  
+</body>
+</html>

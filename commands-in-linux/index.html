@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>Linux 下一条命令是如何执行的 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/M326ZAbpg');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/M326ZAbpg',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="在开始学习很多很多的命令之前，我们先来说说一条命令是如何执行的。只有知道了“命令”的本质，我们才能更快更深入的去学习更多的内容。">
+
+  <meta property="og:title" content="Linux 下一条命令是如何执行的 - 苏近之的博客">
+  <meta property="og:description" content="在开始学习很多很多的命令之前，我们先来说说一条命令是如何执行的。只有知道了“命令”的本质，我们才能更快更深入的去学习更多的内容。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/commands-in-linux/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Linux 下一条命令是如何执行的">
+
+  <meta name="gridea:post_id" content="M326ZAbpg">
+
+  <link rel="canonical" href="https://blog.hacking.icu/commands-in-linux">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">Linux 下一条命令是如何执行的</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.20</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/linux" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>Linux
+              </a>
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+              <a href="https://blog.hacking.icu/tags/c-language" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>C语言
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>在开始学习很多很多的命令之前，我们先来说说一条命令是如何执行的。只有知道了“命令”的本质，我们才能更快更深入的去学习更多的内容。</p>
+<h3 id="命令的本质">命令的本质</h3>
+<p>我们以<code>date</code>命令为例，这条命令可以打印系统时间:</p>
+<pre><code class="language-shell">$ date
+2021年 4月20日 星期二 15时29分46秒 CST
+</code></pre>
+<p>然后我们再介绍一条有用的命令，<code>which</code> ,这条命令可以找到<code>date</code>命令背后的程序所在的位置:</p>
+<pre><code class="language-shell">$ which date
+/bin/date
+</code></pre>
+<p>最后，再来介绍一个命令，<code>file</code>, 我们可以使用这条命令来返回一个文件的类型:</p>
+<pre><code class="language-shell">$ file /bin/date
+/bin/date: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=c2b6122cb2c8789f66de3342471f9d36b3f722ad, stripped, too many notes (256)
+</code></pre>
+<p>哦，原来<strong>命令的本质就是一个别人写好了软件啊，换句话说就是一个可执行文件</strong>啊。何以见得呢？你看输出信息中有 ELF 64-bit 字样，这是什么意思？可执行文件嘛。</p>
+<h3 id="命令在哪里">命令在哪里</h3>
+<p>在上文中，我们已经知道了，<code>date</code>命令在<code>/bin/</code>目录下。那么其他的命令呢？</p>
+<pre><code class="language-shell">$ which cd
+/usr/bin/cd
+</code></pre>
+<p>嗯嗯，和<code>date</code>命令是存放在不同的目录下的，唯一的相同点是都在一个名为<code>bin</code>的子目录下，bin 是  binary 的缩写。不管是在 Linux 下或者 Windows 下都习惯把可执行文件存放在<code>bin</code>目录下，表示它是二进制的可执行文件。</p>
+<p>问题来了，既然这些命令都存放在不同的目录下，当我们在命令行中输入一条命令的时候，Linux 怎么知道它是在哪一个目录下呢？换一种问法：Linux 是如何找到我们在命令行中输入的命令对应的可执行文件的？</p>
+<p>基于约定，Linux(其实是一个名为 Bash  的软件是用来解释命令的) 和我们约定在环境变量<code>path</code>中定义的目录中存放可执行文件。或者说，当我们在命令行下输入一条命令的时候，它会去<code>path</code>变量中定义的目录中去一个一个的找，找到了就执行，找不到就提示<code>Command not found!</code>:</p>
+<pre><code class="language-shell">$ echo $PATH
+/root/.config/composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+</code></pre>
+<p>也就是说在 Linux 下，你只要把你的可执行文件存放在上面使用冒号分隔的任意一个目录中，都能在命令行中输入命令的时候找到对应的程序并执行。那么<code>path</code>这个变量可以改吗？可以加入我自己的目录吗？可以：</p>
+<pre><code class="language-shell"># 把这句话在命令行中执行就生效，或者追加到`~/.bashrc`配置文件中，然后使用`source ~/.bashrc` 生效
+export PATH=&quot;$HOME/my_dir:$PATH&quot;
+</code></pre>
+<blockquote>
+<p>注意: 不要随意更改这个变量，改错了，任何命令都执行不了。Linux 不会对你的危险操作做出提示，因为他的哲学就是，相信你知道自己在做什么。</p>
+</blockquote>
+<h3 id="创建我们自己的命令">创建我们自己的命令</h3>
+<p>然后我们来创建一个自己的命令，你可以使用任何你熟悉的语言来编写。这里，我们使用 C 语言来编写一个经典的 Hello World 程序来演示。之所以使用 C 语言来编写是因为在 Linux 中大量的应用程序都是使用 C 来编写的，我们经常需要来编译安装这些软件，但往往不知所以然。所以使用 C 来编写，是想让大家理解原理。</p>
+<p>创建一个名为<code>hello.c</code>的代码文件，代码如下:</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main() {
+	printf(&quot;Hello World\n&quot;);
+	return 0;
+}
+</code></pre>
+<p>然后我们来编写一个名为<code>Markfile</code>的文件，使用这个文件来告诉 gcc 编译器如何编译我们的代码，内容如下:</p>
+<pre><code class="language-makefile">hello:hello.c
+	gcc hello.c -o hello
+install:
+	mv hello /usr/bin/hello
+</code></pre>
+<p>解释一下文件内容：编译一个名为<code>hello</code>的可执行程序，其源代码文件是<code>hello.c</code>，使用的编译命令是<code>gcc hello.c -o hello</code>, 当我运行<code>make install</code>的时候，执行<code>mv hello /usr/bin/hello</code>命令。</p>
+<p>所以，接下来，我们就可以来执行编译安装命令了：</p>
+<pre><code class="language-shell">make &amp;&amp; make install
+</code></pre>
+<p>之后我们就可以在任意一个路径中，执行我们的<code>hello</code>命令了，然后会在终端输出<code>Hello World</code>并换行 ：</p>
+<pre><code class="language-shell">$ hello
+Hello World
+</code></pre>
+<blockquote>
+<p>扩展开去说一句，为什么 C 语言那么强大，在 Linux 中我们会使用 Shell 来编写各种脚本而不是使用 C 语言呢？那是因为杀鸡不需宰牛刀。</p>
+</blockquote>
+<p>相信通过这一小节，你应该更加深入的明白了 Linux 下命令的本质了。当你在工作学习中遇到<code>make &amp;&amp; make install</code>这样的命令的时候，或者执行这样的命令出错的时候，就不会感到惊讶，而且容易排错了。</p>
+<h3 id="为什么-windows-和-linux-的软件不能通用">为什么 Windows 和 Linux 的软件不能通用</h3>
+<p>其实不只是 Windows 和 Linux， Linux 和 Android，甚至是 MacOS 和 ipadOS 目前都不能通用(当然 Apple 有计划来实现这件事情，对广大的开发者真是福音)。</p>
+<p>ELF 是英文 Executable and Linkable Format 的简称，换句话说它是 Linux 下可执行文件的格式。对的，可执行文件也是一种文件，既然是文件就会有它的编码格式。为什么 Linux 下的软件不能在 Windows 下运行？就是因为 Windows 的可执行文件使用的是 PE 格式，格式不同也就看着眼熟但不认识。</p>
+<p>你可能会说，格式不同，那容易，格式转换一下就好，一个软件就不需要在 Linux 下写一套、Windows 下写一套了。我们从 ELF 中找到答案，Executable and Linkable Format, 前面解释了 Executable，后面还有一个  Linkable 是什么意思。一个软件的编写，不是从 0 开始写的，会依赖大量的操作系统提供的框架、库。如果你用汇编写代码，那么不使用 Windows 或者 Linux 都可以，直接使用汇编器编译成二进制的 CPU 指令，交给 CPU 执行就好了。但是 Linux 和 Windows 中的程序使用 C 或者 C# 之类的语言编写，大量依赖其他操作系统提供的能力。所以，类似于 Wine 这样的项目，期望在 Linux 上运行 Windows 程序，其工程难度之大让人望而生畏啊，到目前为止也并没有很大的突破。</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.04.20</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%91%BD%E4%BB%A4%E7%9A%84%E6%9C%AC%E8%B4%A8">命令的本质</a></li>
+<li><a href="#%E5%91%BD%E4%BB%A4%E5%9C%A8%E5%93%AA%E9%87%8C">命令在哪里</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%88%91%E4%BB%AC%E8%87%AA%E5%B7%B1%E7%9A%84%E5%91%BD%E4%BB%A4">创建我们自己的命令</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88-windows-%E5%92%8C-linux-%E7%9A%84%E8%BD%AF%E4%BB%B6%E4%B8%8D%E8%83%BD%E9%80%9A%E7%94%A8">为什么 Windows 和 Linux 的软件不能通用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

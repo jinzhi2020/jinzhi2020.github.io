@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/NwKqybT_E');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/NwKqybT_E',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="我们常常开玩笑，说如何评价一个人的编程水平，于是就问他/她: 请问你能用几种语言来编写“Hello World”。这个问题能考验一个人学过几种编程语言，优秀的程序员总是不止会一种编程语言。所以，这一篇文章我们就从 Hello World 说起。">
+
+  <meta property="og:title" content="Hello World - 苏近之的博客">
+  <meta property="og:description" content="我们常常开玩笑，说如何评价一个人的编程水平，于是就问他/她: 请问你能用几种语言来编写“Hello World”。这个问题能考验一个人学过几种编程语言，优秀的程序员总是不止会一种编程语言。所以，这一篇文章我们就从 Hello World 说起。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/hello-world/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Hello World">
+
+  <meta name="gridea:post_id" content="NwKqybT_E">
+
+  <link rel="canonical" href="https://blog.hacking.icu/hello-world">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">Hello World</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.08</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>我们常常开玩笑，说如何评价一个人的编程水平，于是就问他/她: 请问你能用几种语言来编写“Hello World”。这个问题能考验一个人学过几种编程语言，优秀的程序员总是不止会一种编程语言。所以，这一篇文章我们就从 Hello World 说起。</p>
+<h3 id="先有-b-在有-c">先有 B 在有 C</h3>
+<p>几乎每一个程序员的程序生涯都是从在屏幕上输出一串“Hello World”开始的，但又一个人一定不是，这个人是 Ken Thompson。大部分人和我一样一定不认识他，他现在被誉为“ Go 语言之父 ”，他创造了 Go 语言。其实它还是 B 语言之父，C 语言之父 Dennis Ritchie 就是他的同时，在他的 B 语言的基础上创造了伟大的 C 语言。但是， B 语言因为缺乏完善的类型系统，退出了历史的舞台，进入了文献中。</p>
+<p>我们先来看看 B 语言版本的 Hello World:</p>
+<pre><code>main() {
+    extrn a, b, c;
+    putchar(a); putchar(b); putchar(c);
+    putchar('!*n');
+}
+a 'hell';
+b 'o, w';
+c 'orld';
+</code></pre>
+<p>从中你是不是看到了一些 C 语言中仍然在使用的字眼？比如说 main 、 extrn 、 putchar 。你还会发现，一个看上去简简单单的“Hello World”字符串必须要用三个全局变量来定义，因为每一个变量都要对其到 4 个字节。第 4 行中， putchar('!*n'); 是什么意思呢？换行。</p>
+<p>由此，我们通过 Hello World 介绍了一门语言，叫做 B 语言。经常有好奇的朋友问我，既然有 C 语言、那么有没有 B 语言和 A 语言呢？有 B 语言，是 C 语言的前身。那么 B 语言的前身是不是 A 语言呢？不是的，是 BCPL 语言。</p>
+<h3 id="可读性最差的-hello-world">可读性最差的 Hello World</h3>
+<p>B 语言发明于 1970 年，已经非常的古老了。但是你仔细看上面的 Hello World, 其实还是能够看懂程序的意图的。而且和 C 语言也非常的接近，大部分小伙伴都有 C 语言的学习经验。但是有一种语言就非常搞笑了，用它写出来的 Hello World 简直没法阅读。</p>
+<pre><code>&gt;+++++++++[&lt;++++++++&gt;-]&lt;.&gt;+++++++[&lt;++++&gt;-]&lt;+.+++++++..+++.[-]&gt;++++++++[&lt;++++&gt;-] &lt;.&gt;+++++++++++[&lt;++++++++&gt;-]&lt;-.--------.+++.------.--------.[-]&gt;++++++++[&lt;++++&gt;- ]&lt;+.[-]++++++++++.
+</code></pre>
+<p>你看懂了吗？反正我是看不懂。但是你可能也猜到了，这种语言肯定不是为了让人去用它写项目的，因为可读性为 0。然后我们再来看这个语言的名字，BrainFuck，经常简称为 BF，Fuck 在英语中是脏话。</p>
+<p>虽然如此，这种语言确实图灵完备的语言，能够实现一切程序，虽然它只有八个关键字：<code> &gt;、+、[、]、.、&lt;、-、,</code>。</p>
+<h3 id="各种版本的-hello-world">各种版本的 Hello World</h3>
+<p>虽然每一个程序员都应该会几种编程语言，但是我不太相信有一个人可以写得出几十种版本的 Hello World。没关系，有一个网站罗列了几十种编程语言版本的 Hello World 示例程序，你可以上去看看，有没有你熟悉的版本。Hello World！</p>
+<p><img src="https://files.dev-test.cn/9156F6EE-A9A6-4BF5-A1D7-BC202EA2F1EE.png" alt="" loading="lazy"></p>
+<h3 id="参考资料">参考资料</h3>
+<ol>
+<li>《Go 语言高级编程》</li>
+<li>维基百科-<a href="https://zh.wikipedia.org/wiki/Brainfuck">Brainfuck 词条</a></li>
+</ol>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.04.08</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%85%88%E6%9C%89-b-%E5%9C%A8%E6%9C%89-c">先有 B 在有 C</a></li>
+<li><a href="#%E5%8F%AF%E8%AF%BB%E6%80%A7%E6%9C%80%E5%B7%AE%E7%9A%84-hello-world">可读性最差的 Hello World</a></li>
+<li><a href="#%E5%90%84%E7%A7%8D%E7%89%88%E6%9C%AC%E7%9A%84-hello-world">各种版本的 Hello World</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

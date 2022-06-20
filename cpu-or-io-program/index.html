@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>CPU 密集和 IO 密集型程序 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/AId3eIe7z');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/AId3eIe7z',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这篇文档描述了 IO 密集型程序和 CPU 密集型程序的概念以及区别。并使用 `sysstate` 这个工具来观察程序运行时候的资源利用率。">
+
+  <meta property="og:title" content="CPU 密集和 IO 密集型程序 - 苏近之的博客">
+  <meta property="og:description" content="这篇文档描述了 IO 密集型程序和 CPU 密集型程序的概念以及区别。并使用 `sysstate` 这个工具来观察程序运行时候的资源利用率。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/cpu-or-io-program/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="CPU 密集和 IO 密集型程序">
+
+  <meta name="gridea:post_id" content="AId3eIe7z">
+
+  <link rel="canonical" href="https://blog.hacking.icu/cpu-or-io-program">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">CPU 密集和 IO 密集型程序</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.06.01</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+              <a href="https://blog.hacking.icu/tags/linux" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>Linux
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>这篇文档描述了 IO 密集型程序和 CPU 密集型程序的概念以及区别。并使用 <code>sysstate</code> 这个工具来观察程序运行时候的资源利用率。</p>
+<h3 id="实验准备">实验准备</h3>
+<p>在 CentOS 下安装 <code>sysstate</code> 可以使用如下命令安装:</p>
+<pre><code class="language-shell">sudo dnf install sysstate -y
+</code></pre>
+<p>安装之后我们可以通过如下命令来查看帮助:</p>
+<pre><code class="language-shell">sar --help
+</code></pre>
+<h3 id="统计-cpu-使用率">统计 CPU 使用率</h3>
+<p>统计 CPU 使用率可以使用如下命令，每 5 秒统计一次, 一共统计 10 次:</p>
+<pre><code class="language-shell">sar -u 5 10
+</code></pre>
+<p>输出内容如下:</p>
+<pre><code>17:16:03        CPU     %user     %nice   %system   %iowait    %steal     %idle
+17:16:08        all      0.30      0.00      0.70      0.00      0.00     99.00
+17:16:13        all      0.40      0.00      0.60      0.00      0.00     99.00
+...省略...
+</code></pre>
+<p>每一列的含义如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>列</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%user</td>
+<td>用户空间 CPU 的使用状态</td>
+</tr>
+<tr>
+<td>%nice</td>
+<td>改变过优先级的 CPU 使用的 CPU 频率</td>
+</tr>
+<tr>
+<td>%system</td>
+<td>内核空间的程序占用 CPU 的比例</td>
+</tr>
+<tr>
+<td>%iowait</td>
+<td>CPU 等待 IO 完成的时间占比</td>
+</tr>
+<tr>
+<td>%steal</td>
+<td>虚拟机相关的 CPU 状态</td>
+</tr>
+<tr>
+<td>%idle</td>
+<td>CPU 空闲的时间占比</td>
+</tr>
+</tbody>
+</table>
+<h3 id="统计-io-使用率">统计 IO 使用率</h3>
+<p>统计磁盘 IO 的使用可以采用如下命令，每 5 秒统计一次，一共统计 10 次:</p>
+<pre><code class="language-shell">sar -b 5 10
+</code></pre>
+<p>输出内容如下:</p>
+<pre><code>17:22:02          tps      rtps      wtps   bread/s   bwrtn/s
+17:22:07         1.60      0.00      1.60      0.00     27.60
+17:22:12         0.00      0.00      0.00      0.00      0.00
+...省略...
+</code></pre>
+<p>每一列的含义如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>列</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tps</td>
+<td>每秒中 IO 设备读写的总量，它的值等于 <code>rtps</code> 和 <code>wtps</code> 两个数值的和</td>
+</tr>
+<tr>
+<td>rtps</td>
+<td>每秒钟 IO 设备读的总量</td>
+</tr>
+<tr>
+<td>wtps</td>
+<td>每秒钟 IO 设备写的总量</td>
+</tr>
+<tr>
+<td>bread/s</td>
+<td>每秒钟从物理设备读入的数据量， 单位是块(Block)</td>
+</tr>
+<tr>
+<td>bwrtn/s</td>
+<td>每秒钟向物理设备写入的数据量，单位是块(Block)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cpu-密集型的程序">CPU 密集型的程序</h3>
+<p>CPU 密集型也称之为计算密集型，这类程序有如下特点:</p>
+<ul>
+<li>完成一项任务的时间取决于 CPU 的运算速度</li>
+<li>CPU 利用率高、其他事情处理慢</li>
+</ul>
+<p>我们来写一个 CPU 密集型的程序使用 Python, 这个程序的目的是计算阶乘:</p>
+<pre><code class="language-python">result = 1
+for i in range(1, 1024001):
+    result = result * 1
+</code></pre>
+<p>打开两个终端窗口，一个用 Python 运行这个程序，另一个用来使用 <code>sar</code> 观察 CPU 的利用率。得到如下结果:</p>
+<pre><code>17:33:49        CPU     %user     %nice   %system   %iowait    %steal     %idle
+17:33:54        all     41.21      0.00      9.25      0.00      0.00     49.55
+17:33:59        all     41.06      0.00      9.54      0.00      0.00     49.40
+17:34:04        all     40.32      0.00     10.33      0.00      0.00     49.35
+17:34:09        all     40.20      0.00     10.25      0.00      0.00     49.55
+17:34:14        all     40.36      0.00     10.24      0.00      0.00     49.40
+</code></pre>
+<p>我们看到当执行这个程序之后，CPU 在用户态的使用率就上到了 40% 以上，而空闲时间则在 49% 左右。</p>
+<h3 id="io-密集型的程序">IO 密集型的程序</h3>
+<p>IO 密集型程序有如下这些特点：</p>
+<ul>
+<li>频繁读写网络、磁盘等任务的程序都属于 IO 密集型程序</li>
+<li>完成一项任务的时间取决于 IO 设备的速度</li>
+<li>CPU 利用率低、大部分时间都在等待 IO 设备完成读写</li>
+</ul>
+<p>我们来写一个 IO 密集型的程序使用 Python，这个程序的目的是往磁盘写入一个 GB 的数据:</p>
+<pre><code class="language-python">with open('empty-2-1GB.txt', 'w') as f:
+    for i in range(1024 * 1024):
+        for j in range(1024):
+            f.write('c')
+        f.flush()
+</code></pre>
+<p>打开两个终端窗口，一个用 Python 运行这个程序，另一个用来使用 <code>sar</code> 观察 CPU 的利用率。得到如下结果:</p>
+<pre><code>17:37:59          tps      rtps      wtps   bread/s   bwrtn/s
+17:38:04         0.80      0.00      0.80      0.00      5.00
+17:38:09         0.00      0.00      0.00      0.00      0.00
+17:38:14         2.80      0.00      2.80      0.00     46.00
+17:38:19         0.00      0.00      0.00      0.00      0.00
+17:38:24         0.00      0.00      0.00      0.00      0.00
+17:38:29         0.00      0.00      0.00      0.00      0.00
+17:38:34        67.80      0.00     67.80      0.00  82046.40
+</code></pre>
+<p>上面这些数据和空闲的时候差别就比较大。</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.09.16</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%87%86%E5%A4%87">实验准备</a></li>
+<li><a href="#%E7%BB%9F%E8%AE%A1-cpu-%E4%BD%BF%E7%94%A8%E7%8E%87">统计 CPU 使用率</a></li>
+<li><a href="#%E7%BB%9F%E8%AE%A1-io-%E4%BD%BF%E7%94%A8%E7%8E%87">统计 IO 使用率</a></li>
+<li><a href="#cpu-%E5%AF%86%E9%9B%86%E5%9E%8B%E7%9A%84%E7%A8%8B%E5%BA%8F">CPU 密集型的程序</a></li>
+<li><a href="#io-%E5%AF%86%E9%9B%86%E5%9E%8B%E7%9A%84%E7%A8%8B%E5%BA%8F">IO 密集型的程序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

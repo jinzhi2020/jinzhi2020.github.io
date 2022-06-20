@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>使用 Markdown 创作 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/CCGLqj0Ru');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/CCGLqj0Ru',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一直以来，我都习惯于使用 Markdown 语法来编写文档，它具有非常好的通用性和可移植性，表现简约而丰富且易于扩展。可以让人专注于写作。">
+
+  <meta property="og:title" content="使用 Markdown 创作 - 苏近之的博客">
+  <meta property="og:description" content="一直以来，我都习惯于使用 Markdown 语法来编写文档，它具有非常好的通用性和可移植性，表现简约而丰富且易于扩展。可以让人专注于写作。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/using-markdown/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="使用 Markdown 创作">
+
+  <meta name="gridea:post_id" content="CCGLqj0Ru">
+
+  <link rel="canonical" href="https://blog.hacking.icu/using-markdown">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">使用 Markdown 创作</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.03.30</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>一直以来，我都习惯于使用 Markdown 语法来编写文档，它具有非常好的通用性和可移植性，表现简约而丰富且易于扩展。可以让人专注于写作。</p>
+<p>本文是我长期使用 Markdown 的一些心得体会，虽然使用 Markdown 非常的简单，但是想要写出漂亮的文章也需要一些的技巧。</p>
+<h3 id="把文档当作是一种学习的方法">把文档当作是一种学习的方法</h3>
+<p>很多人对文档是存在误解的，这源于这些人并不善于写作。我们会认为写作只是为了分享我的观点，传播知识，所谓“文以载道”。确实，这是非常重要的一个目的。但，并不仅仅如此。</p>
+<p>应该把文档、把写作当成是一种学习的方法。在学习的过程中，我们经常会遇到如下问题:</p>
+<ol>
+<li>学会了，也用起来了。但是当别人问我的时候，我也说不清楚。</li>
+<li>学了没有用起来，当要用的时候，或再次想学的时候，需要从头开始。</li>
+<li>学了之后，知道要记录下来，但是不知道要写什么。</li>
+</ol>
+<p>先说第一种情况，这说明你并没有真的学会，或者说你的表达能力太差了。在技术领域，大部分都是一知半解，所以也表达不清楚。所以流传着一句话：如果你能让你的孩子或者你的女朋友都能听懂，那说明你是真的学会了。所以，也有人这么说：教会别人才能证明你会了。 所以，你可以用写文档来检验自己是否真懂。</p>
+<p>再来说第二种情况，我们经常说写代码要注释，因为时间久了自己一定是会忘记的。同样的道理，我们也说读书要做笔记，好记性不如赖笔头。去学习一项技术，我们要翻阅各种形式的资料、文档、网页、视频、书籍，散落在各个地方。下次如果要重新学起，就要重头来过，这种代价是不能承受的。 所以要学着总结、记录、整理，以备查询，温故知新 。</p>
+<p>另外，记录文档也是一种放空自己的手段。理解了，记录下来了，也就可以忘了，保持空杯状态。</p>
+<p>最后要说的是一句名言: 读书要把书读厚，然后要把书读薄 。这句话就可以用来回答第三个问题，不知道写什么，可以按照这句话来实践。学习一门技术，无外乎找资料和实践。最初可以找一本小册子，或者是目录提纲或者是一个思维导图。然后可以找更多的资料来丰富它，可以是网络上的资料、可以是出版的读物、可以是自己思考或者实践的成果。这就是把书读厚。接着要把读厚的书，在此读薄，这就要求我们提纲挈领，总结归纳出重要的、实用的内容加以整理、记录。经过这一个过程，我相信对知识的掌握就较为深刻。</p>
+<h3 id="善用基础元素">善用基础元素</h3>
+<p>绝大部分的 Markdown 编辑器都至少支持强调( &gt; ）、链接( <a href="url">alt</a> ）、图片链接( <img src="url" alt="alt" loading="lazy"> )、加粗( <strong>文本内容</strong> )、斜体( <em>文本内容</em> )、有序列表( 1. 列表项 )、无序列表( *. 列表项 )、分割线( --- )行内代码块( <code>代码</code> )、 多行代码文本 (``` )以及表格(参考下方)等元素:</p>
+<pre><code class="language-text">|列一|列二|列三|
+|---|---|---|
+|行一列一|行一列二|行一列三|
+|行二列一|行二列二|行二列三|
+</code></pre>
+<p>要善用这些元素，表格和列表元素在很多时候可以通用，具体看排版是否简洁舒适。另外，如果是列表元素，当列表项内容超过一行的时候，或者比较多的时候，可以考虑使用空行加大列表的间距。</p>
+<p>对于程序员来说，可能要将很多的代码的片段插入文档之内。可以使用 Markdown 的行内代码块、或者多行代码。但是有几点需要注意:</p>
+<p>• 路径、快捷键的文本要用行内代码块包裹。<br>
+• 避免在正文中摘录大量的代码，除非是在文末的附录章节内容。</p>
+<h3 id="使用图床">使用图床</h3>
+<p>当我们需要将图片嵌入文档的时候，可以使用 ![这是一张图片](图片的 URL) 这样的格式，那么这里的 URL 怎么填写呢？</p>
+<p>比如语雀、有道云笔记、印象笔记等软件平台，你可以使用直接粘贴截图或者拖拽图片文件到文档编辑器中，然后编辑器会自动上传图片并转换成 URL，按照 Markdown 的语法写入我们的文档。以有道为例，如下图所示:</p>
+<p><img src="https://files.dev-test.cn/8449A532-8C2C-44FF-997C-36D7C300BF19.png" alt="" loading="lazy"></p>
+<p>它会转换成自定义的一串标识，作为图片的 URL。这样的形式在其他的软件上是不能够正常识别这张图片的。所以这样的文档在其他的软件平台上是不能够兼容的。另外，这样的功能，在有道云笔记上是收费的。</p>
+<p>那么怎么办呢？我们可以使用图床，图床是一类通过上传图片，得到图片的公开的网络访问 URL 的应用。我们有两种做法:</p>
+<p>• 第一种上传到网络上的各种公用图床上，有免费的也有收费的。<br>
+• 第二种自建图床服务。</p>
+<p>第一种是有一些缺陷的，因为这些或免费或付费的服务，一来是由上传流量方面的限制，二来也很难保证服务的永远可用。如果某天中止服务，你的图片可能也永远找不回来了。</p>
+<p>第二种方式是我使用的方法，可以使用云服务商提供的对象存储服务，来上传图片，得到公开的链接。推荐的云服务商有七牛云(我自己在用)、又拍云、腾讯云、百度云、京东云或者阿里云。这些云服务商都提供了对象存储的服务(OSS)，而且价格相对低廉，提供你使用不完的免费额度。</p>
+<h3 id="考虑文档的兼容性">考虑文档的兼容性</h3>
+<p>但是像语雀这样的 Markdown 编辑器还支持多种更多的元素, 比如脑图、音频、文件等等元素。利用这些元素会更加丰富我们的排版和内容，但是要考虑兼容性，这些都不是标准的 Markdown 所具有的元素。除了标准的元素外，不同的编辑器支持更多的不同的元素，即使是相同的元素也有可能是不同的语法，而且这些语法有的会比较复杂。</p>
+<p>所以，尽量少用编辑器特有的一些语法和元素，这样可以避免将来迁移的时候不必要的兼容问题。如果你仍然希望加入一些特定的元素，比如说脑图，你可以使用图片的形式插入。在其他的工具上编辑好脑图，然后插入。虽然这打破了 Markdown 沉浸式写作的体验，但是会让你的文档有着更强的兼容性，不依赖于特定的软件和平台。</p>
+<h3 id="基础的格式和内容编排">基础的格式和内容编排</h3>
+<p>在写作的时候，有一些基础的格式和内容编排上的要点需要注意的。</p>
+<p>不需要像正式的出版读物一样，开头空两格。这是因为段落与段落之间已经有明显的空行了，并不需要用开头空两格的形式去区分段落。</p>
+<p>此外，段落之间需要有空行，但是也不能有太多的空行，一般一行足以。标题和段落之间可以有一到两行的空行。但是需要注意，有些 Markdown 的编辑器不支持多行的空行。</p>
+<p>因经常性地分段，不要出现大段的文字。一般每个段落从几十是一两百个文字足以，不要长篇大论还不分段。</p>
+<p>俗话说，一图胜前言，在写作内容上，尽可能地图文并茂，避免大段地文字。可以结合各种图示，来讲解内容。这样的文章更容易使人阅读、理解。</p>
+<p>在一段文本中，标注出你觉得重要的、总结性的语句会让人觉得眼前一亮。看文章的时候也会更容易把握重点。而标注的形式可以选择加粗。不要选择斜体，因为并不明显，不要试图使用编辑器提供的颜色、以及自己在这个当中加入 HTML 或者 CSS 代码，因为不是所有的编辑器都能够识别的。</p>
+<h3 id="不要使用过深的层级">不要使用过深的层级</h3>
+<p>Markdown 的文档一般不会太长，相对于出版的图书而言，没有必要建立过多的层级，会让阅读的人失去兴趣。虽然 Markdown 的文档支持最多六级标题，但是并不建议你这么做。</p>
+<blockquote>
+<p>之所以支持六级标题，这是因为 HTML 提供从 H1 到 H6, Markdown 最终会转成 HTML+CSS 展示在页面中。</p>
+</blockquote>
+<p>所以，Markdown 文档最好“扁平化”，一到两级目录是比较阅读的，三级目录也是可以接受的。<br>
+另外，我也建议不要使用一级目录，如果不超过就只有两级目录，那么应该从三级目录开始使用。就如同这篇文档本身一般，只有三级目录:</p>
+<p><img src="https://files.dev-test.cn/B1BCDB1D-C8E0-4FA0-9AEA-E44653D98D77.png" alt="" loading="lazy"></p>
+<p>因为在大多数应用中，一级标题和二级标题的字体太过于大了，相对于正文而言。而三级标题，正好能够突出标题，由不会让人觉得和正文之间有太大的差距。</p>
+<h3 id="写明出处">写明出处</h3>
+<p>我们在文档中可能引用了很多资料，这是技术的写作中是非常正常、难以避免的。所以，最好把这些资料的出处写清楚。</p>
+<p>如果是网页内容，可以使用链接。如果是出版读物，可以使用豆瓣平台该图书的网页。如果是某商业课程，也可以写明“某某网站某某课程”。</p>
+<p>这样写清楚了之后，一来尊重别人的创作权，二来可以让读者通过你的引用阅读更多的内容。</p>
+<h3 id="念念不忘积沙成塔">念念不忘，积沙成塔</h3>
+<p>独木不成林，如果文档不成体系也会如同散沙。所以，我们需要积沙成塔，将文档编撰成册，这也是我们使用语雀这个平台的一个重要原因。可以让文档成体系的展现出来，便于创作检索。</p>
+<p>这样讲文档成册的整理，一方面能够让你的知识成体系，避免我们迷失在知识的海洋中。另一方面也有利于团队协同，避免大家重复制造轮子，消耗过多的精力。大家相互学习创作，才能形成良好的技术氛围。</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.03.30</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%8A%8A%E6%96%87%E6%A1%A3%E5%BD%93%E4%BD%9C%E6%98%AF%E4%B8%80%E7%A7%8D%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%B9%E6%B3%95">把文档当作是一种学习的方法</a></li>
+<li><a href="#%E5%96%84%E7%94%A8%E5%9F%BA%E7%A1%80%E5%85%83%E7%B4%A0">善用基础元素</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BA%8A">使用图床</a></li>
+<li><a href="#%E8%80%83%E8%99%91%E6%96%87%E6%A1%A3%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7">考虑文档的兼容性</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%92%8C%E5%86%85%E5%AE%B9%E7%BC%96%E6%8E%92">基础的格式和内容编排</a></li>
+<li><a href="#%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E8%BF%87%E6%B7%B1%E7%9A%84%E5%B1%82%E7%BA%A7">不要使用过深的层级</a></li>
+<li><a href="#%E5%86%99%E6%98%8E%E5%87%BA%E5%A4%84">写明出处</a></li>
+<li><a href="#%E5%BF%B5%E5%BF%B5%E4%B8%8D%E5%BF%98%E7%A7%AF%E6%B2%99%E6%88%90%E5%A1%94">念念不忘，积沙成塔</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

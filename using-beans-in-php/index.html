@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>使用 Bean 优雅的传递参数 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/rTNJZFWXd');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/rTNJZFWXd',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="在我们的代码中，无外乎是数据和逻辑。但是很多代码很不好的地方就在于数据和逻辑结合地太过于紧密，这样就会导致代码的可维护性和可扩展性大大降低。所以，我们需要将数据封装起来，从逻辑中抽取出来。要做到这一点，有非常多的手段，其中一种就是使用 Bean 的类来抽离数据。">
+
+  <meta property="og:title" content="使用 Bean 优雅的传递参数 - 苏近之的博客">
+  <meta property="og:description" content="在我们的代码中，无外乎是数据和逻辑。但是很多代码很不好的地方就在于数据和逻辑结合地太过于紧密，这样就会导致代码的可维护性和可扩展性大大降低。所以，我们需要将数据封装起来，从逻辑中抽取出来。要做到这一点，有非常多的手段，其中一种就是使用 Bean 的类来抽离数据。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/using-beans-in-php/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="使用 Bean 优雅的传递参数">
+
+  <meta name="gridea:post_id" content="rTNJZFWXd">
+
+  <link rel="canonical" href="https://blog.hacking.icu/using-beans-in-php">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">使用 Bean 优雅的传递参数</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.25</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/php" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>PHP
+              </a>
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>在我们的代码中，无外乎是数据和逻辑。但是很多代码很不好的地方就在于数据和逻辑结合地太过于紧密，这样就会导致代码的可维护性和可扩展性大大降低。所以，我们需要将数据封装起来，从逻辑中抽取出来。要做到这一点，有非常多的手段，其中一种就是使用 Bean 的类来抽离数据。</p>
+<h3 id="如何使用-bean-来传参">如何使用 Bean 来传参</h3>
+<p>我们经常会看到如下的代码，一个方法会接受很多的参数:</p>
+<pre><code class="language-php">class Service {
+        public function doSomeTime(string $boo, int $foo, string $bzz, bool $baz, float $faz) {} 
+}
+</code></pre>
+<p>甚至有时候参数多得要换行写。为了解决这个方法，很多人会使用聚合类的数据结构来包装这些变量，如改成如下形式:</p>
+<pre><code class="language-php">class Service {
+    /**
+     * @example doSomeTime(['boo' =&gt; '', 'foo' =&gt; '', 'bzz' =&gt; '', baz =&gt; '', 'faz' =&gt; ''])
+     */
+        public static function doSomeThings(array $params) {} 
+}
+</code></pre>
+<p>我们使用 <code>$param</code> 来接受传参一来是少了类型的校验、二来是代码缺少了 self-document ，需要额外的注释来说明。所以，如果我们可以使用使用一种名为 Bean 的类来封装代码如下:</p>
+<pre><code class="language-php">class ParamsBean {
+    protected string $boo;
+  protected int $foo;
+  protected string $bzz;
+  protected bool $baz;
+  protected float $faz;
+}
+</code></pre>
+<p>可以看出，我们的 Bean 类就是普通的类，只是这中类没有啥逻辑，是纯粹对数据的封装。一般我们还会给这些类中的属性写一些 <code>getter</code> 、 <code>setter</code>  的方法。如下示例:</p>
+<pre><code class="language-php">class ParamsBean {
+    protected string $boo;
+  // getter
+  public function getBoo(): string {
+    return $this-&gt;$boo; 
+  }
+  // setter
+  public function setBoo(string $boo): void {
+    $this-&gt;$boo = $boo;
+  }
+}
+</code></pre>
+<p>其实就是这么简单，但是我们代码可以更加优雅。比如上面的例子:</p>
+<pre><code class="language-php">$bean = new ParamsBean();
+$bean-&gt;setBoo('boo');
+Service::doSomeThings($bean);
+</code></pre>
+<p>这样我们就解决了上面所说的两个问题，首先是类型不能校验的问题，现在我们交给了 Bean  中的属性类型校验，并且通过 <code>getter</code> 和 <code>setter</code> 方法，我们对类型可以加强校验或对参数进一步加工。另外我们的代码本身就是 self-document 的，这也是面向对象编程带给我们的，代码的可读性会更好，封装性更好。如下图所示:</p>
+<p><img src="https://static.gridea.dev/294376244890305033/rZp1MUFyA.png" alt="" loading="lazy"></p>
+<p>对于这个 Bean 中拥有那些属性，在 IDE 的帮助下一目了然。</p>
+<h3 id="对-bean-进行封装">对 Bean 进行封装</h3>
+<p>但是上面这样的 Bean 还不是很好用，比如我希望对 Bean 做更多的通用性地封装。下面的代码参考了 EasySwoole 框架中 Bean 的实现。比如我们可以传入一个数组，然后根据传入的数组为 Bean 中的属性进行赋值:</p>
+<pre><code class="language-php">class Bean {
+        public function __construct (?array $data) {
+        foreach ($data as $key =&gt; $value) {
+            $this-&gt;$key = $value;
+        }
+    } 
+}
+</code></pre>
+<p>再来，我们可以希望能够将 Bean 中的数据输出为数组, 为其添加 toArray 方法:</p>
+<pre><code class="language-php">class Bean {
+        public function toArray (): array {
+        $data = [];
+        foreach ($this as $key =&gt; $value) {
+            $data[$key] = $value;
+        }
+        return $data;
+    } 
+}
+</code></pre>
+<p>接着，我们希望当用户传入 Bean 中不存在的属性的时候能够自动的过滤掉。不然当执行到构造方法第 5 行的时候，会因为属性不存在而报错 $this-&gt;$key , 可是 $key 在 Bean 中可能会不存在。</p>
+<p>要实现这点，首先我们要利用反射获取所有的 Bean 中的属性。然后在判断是否 $key 是否在属性中存在:</p>
+<pre><code class="language-php">final public function allProperty (): array {
+        $data = [];
+        $clazz = new ReflectionClass($this);
+            // 利用反射获取类中所有 Public 和 Protected 修饰的属性
+        $protectedAndPublicProps = $clazz-&gt;getProperties(
+            ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED
+        );
+        foreach ($protectedAndPublicProps as $prop) {
+            if ($prop-&gt;isStatic()) {        
+                continue;       // 跳过静态属性，一般也不建议在 Bean 中写静态的属性，除非是个别的常量
+            }
+            array_push($data, $prop-&gt;getName());
+        }
+        return $data;
+    }
+</code></pre>
+<p>最后，我们来实现一个过滤方法，在构造函数以及 <code>toArray</code> 方法都去过滤不存在的属性:</p>
+<pre><code class="language-php">private function filterNotExistsProps (array $data): array {
+        $props = $this-&gt;allProperty();
+    // 获取所有的属性，并过滤数据
+        return array_filter($data, fn($key) =&gt; in_array($key, $props), ARRAY_FILTER_USE_KEY);
+}
+</code></pre>
+<p>到这里，我们的 Bean 就比较好用了。但是相对 EasySwoole 中的实现还是简单了一些，也算是抛砖引玉吧。大家可以去看看这个框架中的实现，或者其他的框架也会有类似的实现。</p>
+<h3 id="对-bean-的单元测试">对 Bean 的单元测试</h3>
+<p>最后，我们要给之前写的这个 Bean 类写一段单元测试，代码抄录如下:</p>
+<pre><code class="language-php">class BeanTest extends TestCase {
+    protected Bean $bean;
+    protected function setUp () {
+        parent::setUp();
+        // 利用匿名函数构造一个被测试的类，继承我们上面写的 Bean 类
+        $this-&gt;bean = new class(['name' =&gt; 'bob', 'age' =&gt; 15, 'notExistsKey' =&gt; false]) extends Bean {
+            protected string $name;
+            protected int $age;
+            protected static string $staticProp = 'static prop';
+            public function getName () { return $this-&gt;name; }
+        };
+    }
+    /**
+     * 测试构造函数
+     */
+    public function testConstruct () {
+        $this-&gt;assertEquals('bob', $this-&gt;bean-&gt;getName());
+    }
+    /**
+     * 测试输出数组
+     */
+    public function testToArray () {
+        $arr = $this-&gt;bean-&gt;toArray();
+        $this-&gt;assertIsArray($arr);
+        $this-&gt;assertArrayHasKey('name', $arr);
+        $this-&gt;assertArrayHasKey('age', $arr);
+        $this-&gt;assertArrayNotHasKey('notExistsKey', $arr);
+        $this-&gt;assertEquals('bob', $arr['name']);
+        $this-&gt;assertEquals(15, $arr['age']);
+    }
+}
+</code></pre>
+<h3 id="总结">总结</h3>
+<p>这篇文章一来是和大家分享，如何更加优雅地封装我们在代码中的数据。我很喜欢一个比喻，逻辑就是水管，而数据就是水管里的水。我们要引导水流，控制它的流向以及水量。</p>
+<p>另外，还是想和大家分享这个原则，数据和逻辑分离。</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.05.11</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-bean-%E6%9D%A5%E4%BC%A0%E5%8F%82">如何使用 Bean 来传参</a></li>
+<li><a href="#%E5%AF%B9-bean-%E8%BF%9B%E8%A1%8C%E5%B0%81%E8%A3%85">对 Bean 进行封装</a></li>
+<li><a href="#%E5%AF%B9-bean-%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">对 Bean 的单元测试</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

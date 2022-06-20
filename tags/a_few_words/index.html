@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>苏近之的博客</title>
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    // });
+  </script>
+
+
+
+
+  <meta name="description" content="在图像里寻找自我，在代码里发现自由。">
+  <link rel="canonical" href="">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-2">
+        <div class="my-24">
+          <h1 class="text-3xl py-4">三言两语</h1>
+          <div>三言两语比不言不语要好。</div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="w-full relative bg-white py-16">
+      <div class="max-w-2xl mx-auto">
+        <!-- <div class="text-gray-400 font-light mb-8 text-center">在图像里寻找自我，在代码里发现自由。</div> -->
+        <div>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2022.06.19</div>
+      <a href="https://blog.hacking.icu/destiny" class="post-item"><h2 class="text-2xl post-title leading-tight">宿命</h2></a>
+      <div class="mt-4">你在等待什么
+雨水滋润韭菜
+还是说等待着
+收割一波韭菜
+</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2022.06.14</div>
+      <a href="https://blog.hacking.icu/seeds_and_meteors" class="post-item"><h2 class="text-2xl post-title leading-tight">种子和流星</h2></a>
+      <div class="mt-4">春种秋收的种子，
+无法欣赏流星留下的绚丽。
+而转瞬即逝的流星，
+读不懂漫长岁月中的宽容。
+</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2022.06.14</div>
+      <a href="https://blog.hacking.icu/miss_you" class="post-item"><h2 class="text-2xl post-title leading-tight">想你</h2></a>
+      <div class="mt-4">昨天下了一场雨
+过些天就会忘记
+雨是那么得无足轻重
+眼下你已经离开许久
+想起你泪如雨下
+</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2022.06.11</div>
+      <a href="https://blog.hacking.icu/diamonds_and_cobblestones" class="post-item"><h2 class="text-2xl post-title leading-tight">钻石和鹅软石</h2></a>
+      <div class="mt-4">钻石碰上了鹅卵石，
+钻石说我比你硬，
+鹅软石说我无所谓。
+最硬的东西也最软。
+</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2022.06.09</div>
+      <a href="https://blog.hacking.icu/garbage_bags_and_trash_cans" class="post-item"><h2 class="text-2xl post-title leading-tight">垃圾袋和垃圾桶</h2></a>
+      <div class="mt-4">你给了我一个垃圾袋，
+我想把你装进去。
+你说你想去浪荡，
+来我这里吧，我做你的垃圾桶。
+</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2022.05.24</div>
+      <a href="https://blog.hacking.icu/from_psalms_to_epitaphs" class="post-item"><h2 class="text-2xl post-title leading-tight">从诗篇到墓志铭</h2></a>
+      <div class="mt-4">曾想把生活写作美丽诗篇
+也曾想做个无所畏惧的人
+生活杂乱无章梦止步不前
+就地把生活写作了墓志铭
+</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2022.05.18</div>
+      <a href="https://blog.hacking.icu/cicadas_and_dung_beetles" class="post-item"><h2 class="text-2xl post-title leading-tight">知了和屎壳郎</h2></a>
+      <div class="mt-4">知了操控了举世舆论
+屎壳郎冲上道德高地
+你们我们被当作蝼蚁
+被糖衣包裹在弹丸里
+炮火覆盖金黄的稻田
+火光照亮他自私的脸
+</div>
+    </article>
+  
+    <article class="mb-8 bg-white px-4 md:px-2 py-8 rounded-md">
+      <div class="text-gray-400 mb-4">2021.06.30</div>
+      <a href="https://blog.hacking.icu/how_are_you" class="post-item"><h2 class="text-2xl post-title leading-tight">你最近好吗</h2></a>
+      <div class="mt-4">昨天
+我又收到了你的来信
+虽然
+只是一句简单的问候
+起笔
+想要和你说些什么
+末了
+你近来可好？
+</div>
+    </article>
+  
+</div>
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  
+    
+  
+</body>
+</html>

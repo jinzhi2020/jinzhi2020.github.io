@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>使用 Vim - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/knTu1BYxD');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/knTu1BYxD',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="对于我个人而言，非常喜欢使用 Vim。喜欢到什么程度呢？如果没有 Vim，我就不想写代码。这一篇文档描述了 Vim 的一些基本用法，掌握这些内容，基本上就可以在各种环境下使用 Vim 了。">
+
+  <meta property="og:title" content="使用 Vim - 苏近之的博客">
+  <meta property="og:description" content="对于我个人而言，非常喜欢使用 Vim。喜欢到什么程度呢？如果没有 Vim，我就不想写代码。这一篇文档描述了 Vim 的一些基本用法，掌握这些内容，基本上就可以在各种环境下使用 Vim 了。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/shi-yong-vim/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="使用 Vim">
+
+  <meta name="gridea:post_id" content="knTu1BYxD">
+
+  <link rel="canonical" href="https://blog.hacking.icu/shi-yong-vim">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">使用 Vim</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.02</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+              <a href="https://blog.hacking.icu/tags/linux" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>Linux
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>对于我个人而言，非常喜欢使用 Vim。喜欢到什么程度呢？如果没有 Vim，我就不想写代码。这一篇文档描述了 Vim 的一些基本用法，掌握这些内容，基本上就可以在各种环境下使用 Vim 了。</p>
+<h3 id="vim-的安装">Vim 的安装</h3>
+<p>Vim 的安装还是比较简单的，大部分的 Linux 发行版的都预装了它。但是如果你希望使用新版的 Vim8，可能需要卸载旧版从新编译安装一下。唯一需要注意的是，编译选项中需要开启 Python3 解释器的支持。基本的安装过程如下:</p>
+<pre><code>sudo dnf install ncurses-dev -y
+git clone https://github.com/vim/vim.git
+cd vim/src
+## 启用对 pyhton3 解释器的支持
+./configure --enable-python3interp
+make distclean  # if you build Vim before
+make
+sudo make install
+</code></pre>
+<p>安装完成之后，会在 src 目录下编译出一个二进制的文件 vim ，把这个文件直接移动到 PATH 目录下就可以了:</p>
+<pre><code class="language-shell">$ mv src/vim /usr/bin/vim
+</code></pre>
+<h3 id="基本使用">基本使用</h3>
+<p>下面将介绍一些 Vim 的基本使用，一定要把基本的使用多多练习，为深入的内容打好基础。</p>
+<h4 id="移动光标">移动光标</h4>
+<p>首先要学习的一定是如何移动光标，不允许使用方向键，而是在普通模式下使用 <code>hjkl</code> 四个字母按键:</p>
+<p><img src="https://files.dev-test.cn/20210402233042.png" alt="" loading="lazy"></p>
+<p>其他的一些跳转:</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>操作</th>
+<th>英文助记</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>跳转到行首</td>
+<td>普通模式下: ^</td>
+<td></td>
+</tr>
+<tr>
+<td>跳转到行尾</td>
+<td>普通模式下: $</td>
+<td></td>
+</tr>
+<tr>
+<td>跳转到往后某个字符</td>
+<td>普通模式下: t<c></td>
+<td>To Char</td>
+</tr>
+<tr>
+<td>跳转到往前某个字符</td>
+<td>普通模式下: F<c></td>
+<td>Forward Char</td>
+</tr>
+<tr>
+<td>跳转到文件头</td>
+<td>普通模式下: gg</td>
+<td></td>
+</tr>
+<tr>
+<td>跳转到文件尾</td>
+<td>普通模式下: G</td>
+<td></td>
+</tr>
+<tr>
+<td>跳转到指定行</td>
+<td>命令模式下输入行号</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="删除操作">删除操作</h4>
+<p>常见的删除操作如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>操作</th>
+<th>英文助记</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>向前删除一个字符</td>
+<td>普通模式下: X</td>
+<td></td>
+</tr>
+<tr>
+<td>向后删除一个字符</td>
+<td>普通模式下: x</td>
+<td></td>
+</tr>
+<tr>
+<td>删除一个单词</td>
+<td>普通模式下: daw</td>
+<td>Delete a Word</td>
+</tr>
+<tr>
+<td>删除多个单词</td>
+<td>普通模式下: d<n>w</td>
+<td>Delete n Word</td>
+</tr>
+<tr>
+<td>删除到指定字符</td>
+<td>普通模式下: dt<c></td>
+<td>Delete To Char</td>
+</tr>
+<tr>
+<td>删除一行</td>
+<td>普通模式下: dd</td>
+<td></td>
+</tr>
+<tr>
+<td>删除全部内容</td>
+<td>命令模式下使用 :%d</td>
+<td></td>
+</tr>
+<tr>
+<td>删除连续的多行</td>
+<td>命令模式下使用: <n>,<m>d</td>
+<td>From n To m Delete</td>
+</tr>
+<tr>
+<td>删除所有的空行</td>
+<td>命令模式下使用: g/^$/d</td>
+<td>Delete</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意: 删除操作等同于剪贴操作，如果是剪切操作,再删除之后按下 <code>p</code> 键就可以实现粘贴。</p>
+</blockquote>
+<h4 id="插入模式">插入模式</h4>
+<p>下表记录了一些快捷切换到插入模式的操作:</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>操作</th>
+<th>英文助记</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进入插入模式</td>
+<td>普通模式下: i</td>
+<td>Insert</td>
+</tr>
+<tr>
+<td>光标移动到上一行，并插入</td>
+<td>普通模式下: O</td>
+<td></td>
+</tr>
+<tr>
+<td>光标移动到下一行，并插入</td>
+<td>普通模式下: o</td>
+<td></td>
+</tr>
+<tr>
+<td>光标移动到下个字符后，并插入</td>
+<td>普通模式下: a</td>
+<td>Append</td>
+</tr>
+</tbody>
+</table>
+<h4 id="查找与替换">查找与替换</h4>
+<p>查找的相关场景的操作如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>操作</th>
+<th>英文助记</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从上往下查找</td>
+<td>普通模式下输入: <code>/&lt;word&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>从下往上查找</td>
+<td>普通模式下输入: <code>?&lt;word&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>下一个搜索项</td>
+<td>搜索模式下输入: <code>n</code></td>
+<td>Next</td>
+</tr>
+<tr>
+<td>上一个搜索项</td>
+<td>搜索模式下输入: <code>N</code></td>
+<td>Next</td>
+</tr>
+<tr>
+<td>快速查找</td>
+<td>光标定位到查找的单词，然后输入: <code>SHIFT + *</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>替换的相关场景的操作如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>操作</th>
+<th>英文助记</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前行查找替换, 匹配第一个</td>
+<td>s/<find>/<replace>/</td>
+<td></td>
+</tr>
+<tr>
+<td>当前行查找替换, 匹配所有</td>
+<td>s/<find>/<replace>/g</td>
+<td></td>
+</tr>
+<tr>
+<td>整个文件查找替换，匹配第一个</td>
+<td>%s/<find>/<replace>/</td>
+<td></td>
+</tr>
+<tr>
+<td>整个文件查找替换，匹配所有</td>
+<td>%s/<find>/<replace>/g</td>
+<td></td>
+</tr>
+<tr>
+<td>指定范围查找替换,匹配第一个</td>
+<td><start line>,<end line>s/<find>/<replace>/</td>
+<td></td>
+</tr>
+<tr>
+<td>指定范围查找替换，匹配所有</td>
+<td><start line>,<end line>s/<find>/<replace>/g</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="分屏">分屏</h2>
+<p>默认情况下，我们打开的都是单个文件。那么如果打开多个文件呢？那就需要将其分屏显示。在打开文件的时候，给 vim 加上 <code>-o</code>  或者 <code>-O</code> 来指定多个文件，并分屏显示，前者表示水平分割后者表示垂直分割:</p>
+<pre><code class="language-shell">vim -O index.html style.css
+</code></pre>
+<p>其显示如下:</p>
+<p><img src="https://files.dev-test.cn/20210402233143.png" alt="" loading="lazy"></p>
+<p>我们也可以对当前文件进行分割, 使用快捷键 <code>CTRL+S</code> 或者 <code>CTRL+V</code> , 前者是垂直分割，后者是水平分割。</p>
+<p><img src="https://files.dev-test.cn/20210402233209.png" alt="" loading="lazy"></p>
+<p>如果是要对不同的文件进行分割，就需要在命令模式下使用 <code>split &lt;FileName&gt;</code> 或者 <code>vsplit &lt;FileName&gt;</code> , 同样的道理，前者是垂直分割或者是水平分割:</p>
+<p><img src="https://files.dev-test.cn/20210402233335.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>注意: split 可以简写为 sp, 而 vsplit 可以简写成 vs。</p>
+</blockquote>
+<p>如何操作分配呢？如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>对分屏的操作</th>
+<th>如何操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关闭其他分配，仅仅留下当前分屏</td>
+<td>在 Command 模式下输入 only, 或者使用快捷键 <code>CTRL + W</code> , 然后输入 <code>o</code> ， 也可以按两次 <code>CTRL+W</code> 顺序跳转</td>
+</tr>
+<tr>
+<td>退出当前所在分屏</td>
+<td>在 Command 模式下输入 q 或者 quit</td>
+</tr>
+<tr>
+<td>在分屏之间跳转</td>
+<td>使用快捷键 <code>CTRL+W</code> , 然后输入 <code>hjkl</code> 四个字母中的一个表示方向</td>
+</tr>
+<tr>
+<td>扩大或者缩小分屏范围</td>
+<td>使用快捷键 <code>CTRL+W</code> , 然后输入 <code>+</code> 表示扩大，输入 <code>-</code> 表示缩小</td>
+</tr>
+<tr>
+<td>调整分屏顺序</td>
+<td>使用快捷键 <code>CTRL+W</code> , 然后输入 <code>r</code></td>
+</tr>
+<tr>
+<td>新建一个文件</td>
+<td>在 Command 模式下输入 new</td>
+</tr>
+</tbody>
+</table>
+<h2 id="更换配色方案">更换配色方案</h2>
+<p>更换配色方案是一件简单的事情，确实最能够吸引眼球的事情。我们可以从 GitHub 上找到对应的配置方法，多半只是一个以 .vim 结尾的文件而已，然后将这个文件仿佛在 ~/.vim/colors 目录下即可。<br>
+而我选择的配置方案是<a href="https://github.com/morhetz/gruvbox"> morhetz/gruvbox </a>。效果图如下:</p>
+<p><img src="https://files.dev-test.cn/20210402233400.png" alt="" loading="lazy"></p>
+<p>单独下载主题文件:</p>
+<pre><code class="language-shell">wget http://downloads.end.wiki/gruvbox.vim -O ~/.vim/colors/gruvbox.vim
+</code></pre>
+<h2 id="使用插件管理工具-vimplug">使用插件管理工具-VimPlug</h2>
+<p>VimPlug 是一个崇尚极简主义的一个包管理工具。我们可以使用如下命令进行安装:</p>
+<pre><code class="language-shell">curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+</code></pre>
+<p>然后我们在 vim 的配置文件( Linux 位于 <code>~/.vimrc</code> ）中加入如下配置:</p>
+<pre><code class="language-python">call plug#begin('~/.vim/plugged')
+&quot; 下面这些是插件，可以从 Github 找
+Plug 'fatih/vim-go'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'davidhalter/jedi-vim'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'mattn/emmet-vim'
+call plug#end()
+</code></pre>
+<p>并不需要理解这些配置是什么意思，主要的目的就是为了启用 Minpac 这个插件管理工具。</p>
+<h3 id="语法补足">语法补足</h3>
+<p>使用强大的 YouCompleteMe 可以补足语法，它是 Ycmd 的客户端。所以，首先我们需要安装 Ycmd：</p>
+<pre><code class="language-shell">git clone https://github.com/ycm-core/ycmd.git
+cd ycmd
+git submodule update --init --recursive
+dnf install gcc gcc-g++ -y
+python3 build.py --all
+## 启动 ycmd 服务
+python3 ycmd/__main__.py --port 8888 --options_file ycmd/default_settings.json &gt;&gt; /dev/null &amp;
+## 安装 YouCompleteMe, --go-completer 表示启用 Go 自动完成
+python3 ~/.vim/plugged/YouCompleteMe/install.py --go-completer
+</code></pre>
+<h3 id="显示目录树-nerdtree">显示目录树-NERDTree</h3>
+<p>首先我们需要安装 <code>preservim/nerdtree</code> 插件，这是一个非常好用的目录树插件。<br>
+在安装后，我们使用 Vim 打开一个文件后，使用命令 <code>:NERDTree</code> 就可以打开目录树，如下图所示:</p>
+<p><img src="https://files.dev-test.cn/20210402233439.png" alt="" loading="lazy"></p>
+<p>如何切换左边的目录和右边的文件呢？</p>
+<ul>
+<li>切换目录，使用 <C-W-h></li>
+<li>切换文件，使用 <C-W-l></li>
+</ul>
+<p>如何对目录进行操作呢？</p>
+<ul>
+<li>使用 <code>P</code> 可以跳到最顶层的根目录，使用 <code>p</code> 可以跳到父级目录。</li>
+<li>在任意的目录节点上，使用 <code>m</code> 可以调出操作菜单，对节点进行增删改。</li>
+<li>使用 <code>R</code> 可以刷新目录节点。</li>
+<li>默认情况下，不会显示隐藏的目录，可以使用 <code>I</code> 显示隐藏或显示的目录或文件。</li>
+<li>当光标定位在文件节点，我们可以在右边的窗口打开它。使用 <code>i</code> 是在水平切割的窗口打开，使用 <code>s</code> 是在垂直切割的窗口中打开，而使用 <code>t</code> 是在新的标签页中打开。</li>
+<li>标签页的切换可以使用 <code>gt</code> 或者指定数字的标签页 <code>1gt</code> 、 <code>2gt</code> 。</li>
+</ul>
+<p>如何调正分栏的大小呢？使用 <C-W>+ 或者 <C-W>- 。</p>
+<h3 id="状态栏美化-airline">状态栏美化-Airline</h3>
+<p>Vim 默认的状态栏并不好看，我们需要对其进行美化。首先我们安装两个插件:</p>
+<pre><code>call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
+</code></pre>
+<p>然后，我们在 <code>.vimrc</code> 配置文件中加入一行配置：</p>
+<pre><code>let g:airline_theme=&quot;luna&quot;
+</code></pre>
+<p>最后，我们重新打开 Vim 就可以看到如下的状态栏样式, 相比原来的要好看的多:</p>
+<p><img src="https://files.dev-test.cn/20210402233512.png" alt="" loading="lazy"></p>
+<h3 id="再见html-标签">再见，HTML 标签</h3>
+<p>我刚开始学习编程的时候，是在 Windows 的记事本上输入 HTML 标签，那种输入速度现在来看真的是蜗牛。在 Vim 中如何快速输入 HTML 标签呢？有一个插件叫做 <code>vim-emmet</code> , 请按照上文中介绍的包管理器安装它。<br>
+在安装之后我们就可以快速输入 HTML 标签了，比如:</p>
+<pre><code>html:5
+</code></pre>
+<p>然后按下 <code>ctrl+y</code> , 接着输入 <code>,</code> （英文输入法下的逗号）,就可以触发了，自动生成如下的标签模板:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;UTF-8&quot;&gt;
+	&lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>具体的 Emmet 插件的语法，可以参考<a href="https://docs.emmet.io/abbreviations/syntax/">官方文档</a>。</p>
+<h3 id="我的-vimrc">我的 vimrc</h3>
+<p>下面我留下我的 vim 配置文件，供大家参考:</p>
+<pre><code>set ts=4
+set nu
+set background=dark
+set t_Co=256
+syntax on
+set encoding=utf-8
+colorscheme gruvbox
+filetype on
+let g:airline_theme=&quot;luna&quot;
+:set fillchars+=vert:\|
+highlight VertSplit ctermbg=999 ctermfg=230
+
+call plug#begin('~/.vim/plugged')
+&quot; 下面这些是插件，可以从 Github 找
+Plug 'fatih/vim-go'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'davidhalter/jedi-vim'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'mattn/emmet-vim'
+call plug#end()
+
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+</code></pre>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.04.02</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#vim-%E7%9A%84%E5%AE%89%E8%A3%85">Vim 的安装</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">基本使用</a>
+<ul>
+<li><a href="#%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87">移动光标</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C">删除操作</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F">插入模式</a></li>
+<li><a href="#%E6%9F%A5%E6%89%BE%E4%B8%8E%E6%9B%BF%E6%8D%A2">查找与替换</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E5%B1%8F">分屏</a></li>
+<li><a href="#%E6%9B%B4%E6%8D%A2%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88">更换配色方案</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-vimplug">使用插件管理工具-VimPlug</a>
+<ul>
+<li><a href="#%E8%AF%AD%E6%B3%95%E8%A1%A5%E8%B6%B3">语法补足</a></li>
+<li><a href="#%E6%98%BE%E7%A4%BA%E7%9B%AE%E5%BD%95%E6%A0%91-nerdtree">显示目录树-NERDTree</a></li>
+<li><a href="#%E7%8A%B6%E6%80%81%E6%A0%8F%E7%BE%8E%E5%8C%96-airline">状态栏美化-Airline</a></li>
+<li><a href="#%E5%86%8D%E8%A7%81html-%E6%A0%87%E7%AD%BE">再见，HTML 标签</a></li>
+<li><a href="#%E6%88%91%E7%9A%84-vimrc">我的 vimrc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>全台大停电 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/eShtcSePj');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/eShtcSePj',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="昨天台湾相隔三四年，再一次大面积断电。黑暗带来的是民众的恐慌，毕竟夏天要来了，天气会进一步炎热起来。可是，夏天也毕竟还没有来，此时就已经发生这样的事情，怎让人能对电力的供应提起信心。">
+
+  <meta property="og:title" content="全台大停电 - 苏近之的博客">
+  <meta property="og:description" content="昨天台湾相隔三四年，再一次大面积断电。黑暗带来的是民众的恐慌，毕竟夏天要来了，天气会进一步炎热起来。可是，夏天也毕竟还没有来，此时就已经发生这样的事情，怎让人能对电力的供应提起信心。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/power-cut-in-taiwan/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="全台大停电">
+
+  <meta name="gridea:post_id" content="eShtcSePj">
+
+  <link rel="canonical" href="https://blog.hacking.icu/power-cut-in-taiwan">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">全台大停电</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.05.15</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/note" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>随笔
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>昨天台湾相隔三四年，再一次大面积断电。黑暗带来的是民众的恐慌，毕竟夏天要来了，天气会进一步炎热起来。可是，夏天也毕竟还没有来，此时就已经发生这样的事情，怎让人能对电力的供应提起信心。</p>
+<p>停电的原因是什么？在政治割裂的台湾，在野党和执政党对此的判断自然是截然不同。国民党捡到了枪，不断地攻击民进党的电力政策。民进党认真防守，对于一切缺电的指责都予以最坚决的否认，说这只是一起电力事故，电厂的维修人员按错了一个按钮。真相究竟为何好像不是那么重要，重要的是对于执政党来说如何面对这个夏天，如何让大众相信自己的电力政策，如何让台湾摆脱三缺，缺电，缺水，缺人。</p>
+<p>其实，对于台湾人来说，应该有种希望这只是缺电而不是事故。如果这是因为缺电，导致全台各区轮番限电，其实还好。一来也能理解，理解对于核事故的恐惧因而去核能，也能理解对于绿色家园的向往因而建设绿能，也能理解因为天不降水导致大旱进而影响水利供电。二来缺电的问题如果执政党足够重视还是有解决办法的，虽然因为核电厂的燃料棒已经全部送往美国，已经不可能重启核电了。但还能加大绿能投入 ，重新配比绿能、天然气以及燃煤，而不是荒唐的天然气百分之五十，绿能百分之二十，燃煤百分之三十。或者建设天然气接收站也行，虽然会遭到环保人士的反对，但总是有办法的。所以缺电并不可怕，可怕的是缺点暴露出来的安全危机。</p>
+<p>但是如果真如民进党所说是因为一颗按钮按错导致百万人限电，台电赔偿五亿。那问题就会上升到国安层面，也许解放军一次网络攻击、一颗炮弹也能让台湾全岛陷入黑暗，陷入漫长无尽头的恐慌。相信这并不是民进党当局希望看到的，但很可能超出了他们的能力范围。有没有能力是一回事，重不重视、务不务实、努不努力是更重要的另一回事。</p>
+<p>到底因何停电？真相却是可以由执政者任意涂抹，在野党和百姓没有多少讨价还价之余地。但是真正的真相并不会随着时间消失，它就在那里。真相的重要性并不在于真相的本身，而在于理清真相之后，面对真相之后，如何预测其带来的利与弊，面对利弊如何趋利避害、防微杜渐。<br>
+长期的可持续的利益是不如短期的利益更诱惑的，而小团体的短期的利益经常凌驾于大众的长期利益至上。面对缺电，执政党到底是自信自己的能力还是高估了天意？还是误判民众和对手都智力？大概他们在乎的只有选举利益吧。都说台湾是诈骗天堂，我觉得也是政治骗子的最佳表演舞台，安排好话术，政治人物可以没有原则没有底线，可以让人们对于政治人物的话也可以不加思考地接受。但是现实中的年轻人已经不再是单一颜色就能全盘接收的了，他们开始有了自己崭新的贴近现实的思考。对于执政者来说，对于拥有选举制度的台湾来说，水能载舟亦能覆舟不会是一句空话。</p>
+<p>一个执政党还有长期的目标，最好将广大的群众利益置于正当利益至上。这样才能最好的发挥民主议政的力量。缺水，缺电都不要紧，要采取有用的措施来避免。实际上这也是我一厢情愿的说法，对于当下的台湾政党而言，简直不可想象。</p>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.05.15</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

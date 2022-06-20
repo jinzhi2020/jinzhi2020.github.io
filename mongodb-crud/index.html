@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>MongoDB CRUD - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/dpOjve6Jn');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/dpOjve6Jn',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这一篇文档描述了在 Mongo 中的 CRUD 操作。透过最常用的增删改查来快速了解 MongoDB 。">
+
+  <meta property="og:title" content="MongoDB CRUD - 苏近之的博客">
+  <meta property="og:description" content="这一篇文档描述了在 Mongo 中的 CRUD 操作。透过最常用的增删改查来快速了解 MongoDB 。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/mongodb-crud/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="MongoDB CRUD">
+
+  <meta name="gridea:post_id" content="dpOjve6Jn">
+
+  <link rel="canonical" href="https://blog.hacking.icu/mongodb-crud">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">MongoDB CRUD</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.05.24</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>这一篇文档描述了在 Mongo 中的 CRUD 操作。透过最常用的增删改查来快速了解 MongoDB 。<br /></p>
+<h3 id="插入操作">插入操作</h3>
+<p><br />插入文档的语法如下:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.[insertOne|insertMany]({
+  key: value
+}, {}..., {writeConcern: &lt;document&gt;, ordered: &lt;boolean&gt;});
+</code></pre>
+<p>其中，<code>writeConcern</code>表示安全写，如果没有指定，则是默认写。  而<code>ordered</code>字段则表示无序写入，则 Mongo 会优化写入的速度。<br />​</p>
+<p>指定插入命令之后，返回的响应如下:</p>
+<pre><code class="language-javascript">{&quot;ackownledged&quot;: true, &quot;insertedId&quot;: &quot;xxx&quot;}
+</code></pre>
+<p>如果我们没有通过<code>_id</code>指定主键，那么会自动生成唯一的主键序列。如果制定了重复的主键，则会返回错误：</p>
+<pre><code>E11000 duplicate key error collection: test.accounts.index: _id_ dup key...
+</code></pre>
+<p>我们可以使用<code>ObjectId()</code>函数来创建对象主键，对象主键中也包含了文档的创建时间，我们可以通过<code>ObjectId('5db42e...').getTimestamp()</code> 来获取文档的创建时间。此外，我们可以创建一个复合主键，指定一个文档作为主键:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.insert({_id: {type: &quot;saveings&quot;, accountNo: &quot;001&quot;}})
+</code></pre>
+<p>另外，创建文档也可以使用 <code>insert</code>命令，这个命令和前两个命令的区别是它会根据你你可以传入单个或者多个文档，另外这个命令支持<code>explain</code>查看执行计划，而<code>insertOne</code>和<code>insertMany</code>不支持。另外，还可以使用<code>save</code>命令，但是这个命令底层也是调用<code>insert</code>命令的，所以返回一致。</p>
+<h3 id="查询文档">查询文档</h3>
+<p><br />查询文档我们使用<code>find</code>命令，它的语法如下:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find(&lt;query&gt;, &lt;projection&gt;)
+</code></pre>
+<p>其中, <code>query</code> 指的是查询的条件，而<code>projection</code>则定义了对读取结果的投射（你可以理解为过滤查询字段)。<br /><br>
+<br />查询全部文档:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find() // 可以使用 find().pretty() 来美化输出结果
+</code></pre>
+<p>查询指定数量的文档：</p>
+<pre><code class="language-sql">db.&lt;collection&gt;.find().batchSize(20)
+</code></pre>
+<p>指定条件查询:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find({key1: value1, key2: value2})				// 默认为 and
+// 查询复合主键
+db.&lt;collection&gt;.find({&quot;_id.key&quot;: &quot;value&quot;})
+// 使用比较操作符, $eq \ $ne \ $gt \ $gte \ $lt \ $lte
+db.&lt;collection&gt;.find({key: {$eq: value}})	
+// 另外，还有两个常用的比较操作符：分别是 $in 和 $nin, 查询包含或者不包含指定值的情况
+db.&lt;collection&gt;.find({key: {$in: [&lt;value1&gt;, &lt;value2&gt;...&lt;valueN&gt;]}})
+</code></pre>
+<blockquote>
+<p>⚠️ ： 在使用 $ne 或者 $nin 操作符的时候，, 那么即使文档中不包含你指定的字段，也会查询出来。</p>
+</blockquote>
+<p>操作符号还包括逻辑操作符, 如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$not</td>
+<td>匹配(一个)筛选条件不成立的文档</td>
+</tr>
+<tr>
+<td>$and</td>
+<td>匹配多个筛选条件全部成立的文档</td>
+</tr>
+<tr>
+<td>$or</td>
+<td>匹配至少一个筛选条件成立的文档</td>
+</tr>
+<tr>
+<td>$nor</td>
+<td>匹配多个筛选条件全部不成立的文档</td>
+</tr>
+</tbody>
+</table>
+<p>示例如下:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find({ $and: [ {key: { $gt: value} }, {key, {$lt: &quot;value&quot;}} ] })
+</code></pre>
+<p>查询指定字段是否存在:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find( {key: { $exists: true }} ) // 查询存在 key 字段的文档
+</code></pre>
+<p>查询字段的类型:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find( {key: {$type: &quot;string&quot;}}). // 查询 key 的类型为 string 的文档
+</code></pre>
+<p>查询数组操作符，分为为 <code>$all</code>和<code>$elemMatch</code>:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find( { key: {$all: [&lt;value1&gt;, &lt;value2&gt; ...&lt;valueN&gt;]}}) // 包含所有指定的数组值
+db.&lt;collection&gt;.find( { key: {$elemMatch: [&lt;value1&gt;, &lt;value2&gt; ...&lt;valueN&gt;]}}) // 包含任意的数组值
+</code></pre>
+<p>使用正则表达式来查询:</p>
+<pre><code class="language-javascript">db.&lt;colletion&gt;.find({name: {$in: [ /^c/, /^j/]}}) // 查询 c 或者 j 开头的姓名
+db.&lt;collection&gt;.find({name: {$regex: /LIE/, $options: 'i' }}) // i 表示不区分大小写，大部分使用这样的语法，除非用 in
+</code></pre>
+<p>默认返回前面 20 条数据，查询数量:</p>
+<pre><code class="language-sql">db.&lt;collection&gt;.find().count()
+</code></pre>
+<p>查询单条数据:</p>
+<pre><code class="language-sql">db.&lt;collection&gt;.findOne()
+</code></pre>
+<p>有些字段是对象，可以采用嵌套查询:</p>
+<pre><code class="language-sql">db.&lt;collection&gt;.find({
+    &quot;imdb.rating&quot;: 6.2
+})
+</code></pre>
+<p>查询评分少于 6.2 的电影:</p>
+<pre><code class="language-sql">db.&lt;collection&gt;movies.find({
+    &quot;imdb.rating&quot;: {$lt: 6.2}
+})
+</code></pre>
+<p>再来看看如何进行排序:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find().sort({key1: -1, key2: 1})
+</code></pre>
+<blockquote>
+<p>注意⚠️: 当 <code>skip</code>、<code>limit</code>、<code>sort</code> 命令一起执行的时候，需要注意顺序，<code>sort</code> 会在 <code>limit</code> 和 <code>skip</code>之前执行，<code>skip</code>在 <code>limit</code> 之前执行。</p>
+</blockquote>
+<p>最后再来看看文档的投影:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find({}, { key: 1 }) // 值返回文档中的 key, 和文档主键
+db.&lt;collection&gt;.find({}, { key: 0 }) // 不返回文档中的 key
+</code></pre>
+<blockquote>
+<p>注意⚠️：除了文档主键其他的不能混用包含和不包含两种操作，要么使用包含，要么使用不包含。</p>
+</blockquote>
+<p>在涉及到数组的时候，投影可能会更加的复杂。看如下示例：</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.find({}, {key: { $slide: 1}}). // key 是一个数组，使用 $slide 只返回它的第一个元素，也可以使用 -1 -2
+db.&lt;collection&gt;.find({}, {key: { $elemMatch: {$gt: &quot;value&quot;}}}) // 返回数组只能够第一个满足大于指定的值的元素
+</code></pre>
+<br />
+<h3 id="更新文档">更新文档</h3>
+<p><br />更新文档使用<code>update</code>命令，具体的语法如下:</p>
+<pre><code class="language-javascript">db.&lt;collection&gt;.[updateOne|updateMany](&lt;query&gt;, &lt;update&gt;, &lt;options&gt;)
+</code></pre>
+<p>其中，<code>query</code>定义了查询的条件，即满足条件的文档会被更新；<code>update</code>表示文档更新的内容；<code>options</code>是更新的一些选项配置。例如下面的示例更新了用户的名称:</p>
+<pre><code class="language-javascript">db.tags.updateOne({name: &quot;Tom&quot;}, {
+    $set: {name: &quot;Bob&quot;},
+})
+</code></pre>
+<blockquote>
+<p>注意：文档的主键 <code>_id</code> 是不能够被更改的。</p>
+</blockquote>
+<p>默认情况下，只会更新一篇文档，即使是查询到条件满足多篇文档也是如此。除非我们在 <code>options</code> 文档中指定 <code>multi</code> 参数为 <code>true</code> ，才会更新多篇文档。</p>
+<blockquote>
+<p>注意:  MongoDB 只能保障单个文档更新的原子性，而不能保证多个文档更新时候的原子性。更新多个文档的操作苏联在单一线程中执行，但是线程在执行过程中可能会被挂起，以便其他线程也有机会对数据进行操作，在这个过程中挂起线程中的文档就可能会其他线程改变。如果需要保障多个文档的更新的原子性，就需要使用 4.0 版本开始提供的事务特性。</p>
+</blockquote>
+<p>默认情况下，如果更新中指定的查询条件不被任何文档满足，就不会更新任一文档。但是我们可以通过<code>options</code>文档中的<code>upsert</code> 字段来改变这样的默认行为，即使不满足任何条件，也会创建文档。<br />​</p>
+<p>如果我们使用 <code>db.&lt;collection&gt;.save(&lt;document&gt;)</code> 命令的时候，如果当中包含了 <code>_id</code> 字段，就会调用<code>db.&lt;collection&gt;.update</code> 来更新我们的文档，否则则会创建文档。<br />​<br /></p>
+<h4 id="基本操作符">基本操作符</h4>
+<p><br />上文中，类似于<code>$set</code>这样的被称之更新操作符。类似的如下所示:</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>操作符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$set</code></td>
+<td>更新或者新增字段</td>
+<td><code>$unset</code></td>
+<td>删除字段</td>
+</tr>
+<tr>
+<td><code>$rename</code></td>
+<td>重命名字段</td>
+<td><code>$inc</code></td>
+<td>加减字段</td>
+</tr>
+<tr>
+<td><code>$mul</code></td>
+<td>相乘字段值</td>
+<td><code>$min</code></td>
+<td>比较减小字段值</td>
+</tr>
+<tr>
+<td><code>$max</code></td>
+<td>比较增大字段值</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>我们在来看看<code>$unset</code> 操作符的示例:</p>
+<pre><code class="language-javascript">db.tags.updateOne({name: &quot;Bob&quot;}, {
+    $unset: {
+        status: &quot;这里写什么都可以，不影响删除这个字段&quot;,
+    }
+})
+</code></pre>
+<blockquote>
+<p>注意: 如果 <code>$unset</code> 的字段在文档中不存在，则不会执行更新操作。另外，需要注意，如果 <code>$unset</code> 的是一个数组元素，那么数组的元素会被设置为 <code>null</code>, 但是数组的长度不会被改变。</p>
+</blockquote>
+<p><br />接着我们再来看看<code>$rename</code> 操作符的示例:</p>
+<pre><code class="language-javascript">db.tags.updateMany({name: &quot;Bob&quot;}, {
+    $rename: {
+        name: &quot;nickname&quot;
+    }
+})
+</code></pre>
+<p>语法都几乎是一样的，但是有一点需要注意，如果并不是更新整个集合的所有文档，那么并不会删除这个被 rename 的字段，而是会将其值置为 <code>null</code>, 并添加新字段。如果所有的文档的字段都被统一 <code>rename</code>，则原字段会被删除。如果<code>$rename</code>的字段不存在，则不会更新文档。如果字段已经存在，则已经存在的字段下的值会被 <code>$rename</code> 的值覆盖。<br />​</p>
+<p>另外，<code>$rename</code> 操作也可以用来改变文档的结构，比如插入如下文档:</p>
+<pre><code class="language-javascript">db.products.insertOne({
+    name: &quot;iPhone 12 Pro Max&quot;,
+    price: 9200.00,
+    details : {
+        main_img: &quot;http://dv-test.cn/img/202005240102.jpg&quot;,
+        sku: {memory: &quot;6GB&quot;, storage: &quot;128GB&quot;}
+    }
+})
+</code></pre>
+<p>如果我希望把 <code>.details.main_img</code> 提升到 <code>.main_img</code> ，把 <code>.price</code> 放到 <code>.detail</code> 当中去呢？如下实例:</p>
+<pre><code class="language-javascript">db.products.updateOne({name: &quot;iPhone 12 Pro Max&quot;}, {
+    $rename: {
+        price: &quot;details.price&quot;,
+        &quot;details.main_img&quot;: &quot;main_img&quot;
+    }
+})
+</code></pre>
+<blockquote>
+<p>注意: <code>$rename</code> 来改变文档字段结构的时候，更新前和更新后的字段都不能是数组内的元素。</p>
+</blockquote>
+<p>和其他数据库的更新操作不一样，Mongo 还增加了 <code>$min</code> 和 <code>$max</code> 这两个比较更新操作符。顾名思义，先行比较，比较之后根据比较结果的大小来决定是否更新。我们以<code>$min</code>来举例:</p>
+<pre><code class="language-json">db.products.updateOne({name: &quot;iPhone 12 Pro Max&quot;}, {
+    $min: {
+        &quot;details.price&quot;: 10000.00,
+    }
+})
+</code></pre>
+<p>这条更新操作并不会真得更新。因为我们得产品的价格是 9200, 小于我们更新的价格，因为 <code>$min</code> 操作符的缘故，所以不会更新大于原始值的值。如果换成<code>$max</code> 操作符，就会更新。**类似于<code>$inc</code>、<code>$min</code>、<code>$max</code> 这样的操作符，如果更新的字段并不存在，则仍旧会更新。另外，如果更新后的字段类型和原来的字段类型不同，会根据 Mongo 默认的比较规则来更新。规则如下:</p>
+<table>
+<thead>
+<tr>
+<th>最小</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>最大</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Null</td>
+<td>Numbers</td>
+<td>Symbol、String</td>
+<td>Object</td>
+<td>Array</td>
+<td>BinData</td>
+<td>ObjectId</td>
+<td>Boolean</td>
+<td>Date</td>
+<td>Timestamp</td>
+<td>Regular Expression</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h4 id="数组操作符">数组操作符</h4>
+<p><br />我们来说一些更新数组的操作符:</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>操作符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$addToSet</code>​</td>
+<td>向数组中添加元素</td>
+<td><code>$pop</code></td>
+<td>从数组中移除元素</td>
+</tr>
+<tr>
+<td><code>$pull</code>​</td>
+<td>从数组中有选择性移除元素</td>
+<td><code>$pullAll</code>​</td>
+<td>从数组中有选择性地移除元素</td>
+</tr>
+<tr>
+<td><code>pull</code>​</td>
+<td>向数组中添加元素</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>首先，我们来演示 <code>$addToSet</code> ，如果指定的 key 不存在则会创建。下面的示例中，我们为 <code>products</code>集合中的 <code>iPhone 12 Pro Max</code>添加类目信息，它是一个数组:</p>
+<pre><code class="language-javascript">db.products.updateOne({name: &quot;iPhone 12 Pro Max&quot;}, {
+    $addToSet: {
+        categories: [&quot;Phone&quot;, &quot;Apple&quot;]
+    }
+})
+</code></pre>
+<p>这里需要注意的是，如果你添加的字段的值的顺序不同，也会被作为新的内容插入，比如说你把<code>categories</code>的值改成<code>[&quot;Apple&quot;, &quot;Phone&quot;]</code> 也会被当作新的记录插入。<br />​</p>
+<p>那么如果我希望往数组中添加一个值呢？将<code>[&quot;Phone&quot;,  &quot;Apple&quot;]</code>改成<code>[&quot;Phone&quot;, &quot;Apple&quot;, &quot;2021&quot;, &quot;Hot&quot;]</code>呢？可以使用<code>$push</code>操作符:</p>
+<pre><code class="language-javascript">db.products.updateOne({name: &quot;iPhone 12 Pro Max&quot;}, {
+    $push: {
+        &quot;categories.0&quot;: {
+          $each: [&quot;2021&quot;, &quot;Hot&quot;],
+          $position: 0, $sort: 1, $slice: -8
+        }
+    }
+})
+</code></pre>
+<p>如果你不加上<code>$each</code>操作符的话，<code>[&quot;2021&quot;, &quot;Hot&quot;]</code> 整个数组都会被作为一个元素插入到原有的数组中去。而 <code>$position</code> 操作符的作用是将元素添加到指定位置，接受负值。而 <code>$sort</code> 操作符是为了给更新后的数组排序的（1 升序、-1 降序），<code>$slice</code> 操作符可以对更新后数组进行截取。<strong>但</strong><code>**$slice**</code>** 和  <strong><code>**$sort**</code></strong> 操作符必须和 <strong><code>**$each**</code></strong> 和 <strong><code>**$push**</code></strong> 配合使用。<strong>不管书写的顺序是什么，但是</strong>这几个操作符的执行允许永远是先**<code>**$position**</code>** 后 <strong><code>**$sort**</code></strong> 最后 <strong><code>**$slice**</code></strong>。**<br />​</p>
+<p>既然有<code>$push</code>就会有对应的<code>$pop</code>， 删除一个元素，示例如下:</p>
+<pre><code class="language-javascript">db.products.updateOne({name: &quot;iPhone 12 Pro Max&quot;}, {
+    $pop: {
+        &quot;categories.1&quot;: -1,
+    }
+})
+</code></pre>
+<p>使用<code>$pop</code>操作符清除数组中最后一个元素之后，并不会清除数组本身，而是保留空数组。另外，不要将<code>$pop</code>运用在非数组类型的字段上。和 <code>$pop</code> 相比，我们可以使用更加灵活的<code>$pull</code> 操作符:</p>
+<pre><code class="language-json">db.products.updateOne({name: &quot;iPhone 12 Pro Max&quot;}, {
+    $pull: {
+        &quot;categories.0&quot;: { $regex: /20/ },
+    }
+})
+</code></pre>
+<p>上面的代码中，我们使用了正则来查找出匹配的数组元素，并删除，所以相比 <code>$pop</code> 而言更加的灵活、强大。除了<code>$pull</code>操作符外，还有一个<code>$pullAll</code>操作符，可以指定多个匹配的值，然后删除全部匹配的内容。下面两个命令达到的效果是一样的:</p>
+<pre><code class="language-json">{ $pullAll: { key: [value1, value2]}}
+{ $pull: {key: {$in: [value1, value2]}}}
+</code></pre>
+<p><strong>但是需要注意的是，使用</strong><code>**$pullAll**</code><strong>操作符，必须完全匹配文档的内容，遇到数组、对象这样的类型的时候必须完全匹配。而使用</strong><code>**$pull**</code><strong>操作符则不必完全匹配。</strong></p>
+<h5 id=""></h5>
+<h4 id="占位符">占位符</h4>
+<p><br />我们来看下面的语句来说明占位符的作用:</p>
+<pre><code class="language-json">db.products.updateOne({ name: &quot;iPhone 12 Pro Max&quot;, categories: [&quot;Phone&quot;]}, {
+    $set: {
+        &quot;categories.$&quot;: [&quot;Spring&quot;]
+    }
+})
+</code></pre>
+<p>这句当中的 <code>$</code> 符号就是占位符，表示的是更新数组的第一个符合条件 元素。看上面的示例，<code>categories.$</code> 指代的就是在符合我们的查询条件 <code>categories: [&quot;Phone&quot;]</code> 的第一个值，它将被更新为 <code>[&quot;Spring&quot;]</code>。<br />​</p>
+<p>使用 <code>$</code> 占位符更新的只是符合条件的第一个值，那么如果我希望更新所有符合条件的值呢？可以使用占位符 <code>$[]</code>， 这样就不需要指定条件了，如下:</p>
+<pre><code class="language-json">db.products.updateOne({ name: &quot;iPhone 12 Pro Max&quot;}, {
+    $set: {
+        &quot;categories.$[]&quot;: [&quot;Spring!&quot;]
+    }
+}) 
+</code></pre>
+<br />
+<h3 id="删除文档">删除文档</h3>
+<p><br />删除文档相比之前的操作来说简单多了，可以使用 <code>deleteOne|deleteMany</code>命令，语法格式如下:</p>
+<pre><code class="language-json">db.&lt;collection&gt;.[deleteOne|deleteMany](&lt;query&gt;, &lt;options&gt;)
+</code></pre>
+<p>其中<code>query</code> 文档用以指定查询条件，而<code>options</code> 用以指定删除的一些配置选项。例如我们要删除之前产品的文档:</p>
+<pre><code class="language-json">db.products.deleteOne({ name: &quot;iPhone 12 Pro Max&quot;})
+</code></pre>
+<p>删除所有文档，可以不指定参数:</p>
+<pre><code class="language-json">db.products.deleteMany({})
+</code></pre>
+<p>如果我们需要删除整个集合，可以使用 <code>drop</code> 命令:</p>
+<pre><code class="language-json">db.products.drop()
+</code></pre>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.05.24</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C">插入操作</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3">查询文档</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3">更新文档</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AC%A6">基本操作符</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C%E7%AC%A6">数组操作符</a><br>
+*</li>
+<li><a href="#%E5%8D%A0%E4%BD%8D%E7%AC%A6">占位符</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3">删除文档</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>

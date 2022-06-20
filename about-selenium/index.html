@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" style="--theme-color: #c1c2c3; --link-color: #c1c2c3;">
+<head>
+  <meta charset="UTF-8">
+  <title>Selenium 简介 - 苏近之的博客</title>
+
+  <link rel="icon" href="https://files.dev-test.cn/favicon.ico">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link rel="alternate" type="application/atom+xml" title="苏近之的博客 - Atom Feed" href="https://blog.hacking.icu/atom.xml">
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCRR8Q57W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script> -->
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-182385326-1');
+    ga('set', 'dimension1', 'site/uQl7LmzA9');
+    ga('set', 'dimension2', 'post/4DBVI3vLP');
+    ga('send', 'pageview');
+    // gtag('set', {
+    //   'custom_map': {
+    //     'dimension1': 'siteId',
+    //     'dimension2': 'postId',
+    //   }
+    // })
+
+    // gtag('config', 'G-NFCRR8Q57W', {
+    //   'siteId': 'site/uQl7LmzA9',
+    //   'postId': 'post/4DBVI3vLP',
+    // });
+  </script>
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Selenium 是一款非常流行的 GUI 自动化测试工具，学好它成为了一个测试工程师的必备技能。从这一篇文档开始，我们来详细说明其技术细节，以及如何更好地运用于实际。让我们开始吧。">
+
+  <meta property="og:title" content="Selenium 简介 - 苏近之的博客">
+  <meta property="og:description" content="Selenium 是一款非常流行的 GUI 自动化测试工具，学好它成为了一个测试工程师的必备技能。从这一篇文档开始，我们来详细说明其技术细节，以及如何更好地运用于实际。让我们开始吧。">
+  
+  <meta property="og:url" content="https://blog.hacking.icu/about-selenium/">
+  <meta property="og:site_name" content="苏近之的博客">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Selenium 简介">
+
+  <meta name="gridea:post_id" content="4DBVI3vLP">
+
+  <link rel="canonical" href="https://blog.hacking.icu/about-selenium">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.0.3/styles/a11y-light.css">
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/css/main.css">
+
+</head>
+<body>
+  
+    
+  
+  <div id="page">
+    <div class="mb-16 sticky top-0 z-20 bg-white">
+  <header class="py-4 flex items-baseline justify-between max-w-2xl mx-auto px-2">
+    <h1 class="text-lg text-center font-medium px-4 md:px-0 flex items-center">
+      <div class="site-logo-text font-normal">苏</div>
+      <a href="/">苏近之的博客</a>
+    </h1>
+    <div class="hidden sm:flex justify-center">
+      
+        
+        <a
+          href="/"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >首页</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >编程</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >摄影</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >随笔</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >三言</a>
+        
+          <span class="text-gray-200">/</span>
+        
+      
+        
+        <a
+          href="/about"
+          class="mx-2 text-base border-b border-transparent"
+          
+        >关于</a>
+        
+      
+    </div>
+    <div class="flex sm:hidden py-2 px-4 text-center cursor-pointer" @click="openMenu = true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+    </div>
+  </header>
+
+  <div class="fixed top-0 right-0 bottom-0 left-0 bg-white hidden" :style="{
+    display: openMenu ? 'block !important' : 'none',
+  }" v-if="openMenu">
+    <div class="py-4 px-2 flex justify-end" @click="openMenu = false">
+      <div class="flex py-2 px-4 text-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+      </div>
+    </div>
+    <div class="flex flex-col p-4">
+      
+        
+        <a
+          href="/"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >首页</a>
+      
+        
+        <a
+          href="/tags/program"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >编程</a>
+      
+        
+        <a
+          href="/tags/photography"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >摄影</a>
+      
+        
+        <a
+          href="/tags/note"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >随笔</a>
+      
+        
+        <a
+          href="/tags/a_few_words"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >三言</a>
+      
+        
+        <a
+          href="/about"
+          class="mx-2 my-4 text-base border-b border-transparent"
+          
+        >关于</a>
+      
+    </div>
+  </div>
+</div>
+    <div class="border-b border-gray-200">
+      <div class="max-w-2xl mx-auto px-6 md:px-2">
+        <div class="my-24 text-center">
+          <h1 class="text-2xl font-bold">Selenium 简介</h1>
+          <div class="post-title-bar mx-auto rounded mt-4"></div>
+          <div class="text-gray-400 mt-4">2021.04.06</div>
+          <div class="flex justify-center mt-4">
+            
+              <a href="https://blog.hacking.icu/tags/program" class="inline-flex items-center mr-4 text-sm text-gray-600">
+                <span class="mr-1">#</span>编程
+              </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sticky-bar" class="w-full sticky top-0 z-10 bg-white" style="height: 64px;"></div>
+    <div class="p-4 md:p-16 bg-white">
+      <div class="max-w-2xl mx-auto px-4 flex relative">
+        <section class="post-content flex-1 default-post-content max-w-2xl">
+          <div v-pre>
+            <p>Selenium 是一款非常流行的 GUI 自动化测试工具，学好它成为了一个测试工程师的必备技能。从这一篇文档开始，我们来详细说明其技术细节，以及如何更好地运用于实际。让我们开始吧。</p>
+<p>本系列的文档假设读者已经具备了 Python3、HTML、CSS 以及 JavaScript 的基础知识。</p>
+<h3 id="selenium-的特性">Selenium 的特性</h3>
+<p>对于一个测试工程师而言，Selenium 只不过是手头的一个工具而已。那么首先要做的是不是学习工具如何使用，而是应该先问问自己为什么要使用它。不然就会陷入手里有一把锤子，看什么都是钉子的思维陷阱中。学习其他技术也是一般，首先要了解工具的应用场景以及特性，然后在考虑要不要学、要不要用。</p>
+<p>Selenium 是一款基于 GUI 的测试工具，这就决定了它的应用领域仅仅是 Web GUI，而不是 App、也不是接口。然后它拥有如下的特性:</p>
+<p>• 开源免费的框架<br>
+• 支持多种浏览器、比如说 Chrome、Firefox、IE 等。<br>
+• 支持多种开发语言，比如说 Java、Python、C#、Ruby、JavaScript、Kotlin，不排除官方会支持更多的语言。<br>
+• 支持并发测试，支持在多台机器上并发执行测试。</p>
+<p>这里需要说明的是，IE 浏览器即将退出历史舞台，相应的微软推出了 Edge 浏览器。不要以为 Edge 浏览器是 IE 浏览器的升级版，Edge 是基于 Chrome 内核编写的全新的浏览器，正对 Chrome 内核进行了大量的优化。</p>
+<p>另外，虽然 Selenuim 支持非常多的编程语言，但是本系列的文档暂时按照 Python 语言来编写代码。事实上，我也建议开发团队使用 Python 而不是其他语言来编写 Selenuim 脚本，这类的脚本并不需要使用 Java 那样沉重的工程化语言编写。</p>
+<h3 id="发展历史">发展历史</h3>
+<p>Selenium 到目前为止，一共经历了三个大的版本，从 1.0 到 3.0。1.0 版本开始提供了 Selenium IDE、SeleniumGrid、Selenium RC 三个工具。其中 2.0 版本获得了极大的成功，使用了 WebDriver , 在 3.0 版本中，移除了 Selenium RC。</p>
+<p>• Selenium IDE 是一个基于 Firefox 浏览器的插件，可以实现对浏览器操作的录制和会犯，录制的脚本可以转化为多种语言。<br>
+• Selenium Grid 主要用于并发测试。<br>
+• Selenium 和 WebDriver 原本是两个项目，后来合二为一。<br>
+关于这部分，了解一下就可以了。知道至今共经历了三个大的版本，最大的变化在于使用 WebDriver 替换了 Selenium RC。当前是 3.x 版本，相对于 2.x 版本做了如下修改:<br>
+• 去除 Selenium RC 组件。<br>
+• 遵循 W3C 的标准。<br>
+• 扩展 WebDriver API 的功能，提供了移动端的测试套件。<br>
+• 支持 IE9.0 以上版本以及 Windows Edge 浏览器。<br>
+• 支持 Java 8 以上版本。</p>
+<h3 id="开发环境说明">开发环境说明</h3>
+<p>关于开发环境，大家都应该学着自己去尝试搭建。说得明白一点，所谓的开发环境，大多数情况下只是开发需要一些软件，下载安装即可。那么 Selenium 的开发环境需要那些软件呢？</p>
+<ol>
+<li>操作系统的选择，你可以选择 Windows、Linux、MacOS 都可以。</li>
+<li>Python IDE 的选择，你可以选择记事本或者 PyCharm，相信你会选择后者。</li>
+<li>浏览器的选择，一般情况下选择 Chrome 或者 Edge 即可。</li>
+<li>需要下载浏览器的驱动，使得 Selenium 框架可以驱动浏览器按照我们书写的脚本 Running。</li>
+</ol>
+<p>关于第 4 点，特别提醒一下，驱动需要通过 <a href="https://www.selenium.dev/downloads/">Selenium 官方网页</a>下载 ,如下图所示：</p>
+<p><img src="https://files.dev-test.cn/20210406190217.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>注意: 不同的浏览器、不同的浏览器版本，对应的 WebDriver 也是不同的，一定要版本一致，避免不必要的麻烦。</p>
+</blockquote>
+<p>下载之后，需要将 WebDriver 的可执行程序存放于系统的环境变量 <code>$PATH</code> 中的目录中去。如何查看 <code>$PATH</code> 环境变量呢？可以在终端中输入 <code>echo $PATH</code>  查看当中包含的目录，比如我使用的是 Windows 操作系统，就将其存放于 <code>C:\Users\&lt;用户名&gt;\bin</code> 目录下。如果你使用的是 Linux 或者 MacOS 操作系统，就可以将其存放于 <code>/usr/local/bin</code> 目录下。</p>
+<p>Python 的安装就不说了，以及对应的 Selenium 库的安装。相信看到这里的读者都具备 Python 的基础能力，可以参考《Python 环境搭建》一文。另外，Python 的版本选择最新版即可。</p>
+<blockquote>
+<p>注意: 在使用 pip 的过程中如果出现无法下载的情况，可以尝试使用阿里云的镜像，在 pip 命令中加入参数：</p>
+</blockquote>
+<pre><code class="language-shell">pip -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
+</code></pre>
+<h3 id="打开和关闭浏览器">打开和关闭浏览器</h3>
+<p>接着，我们就可以动手来写一段代码，来打开浏览器并跳转到我们指定的网页。在完成了这一操作之后，我们关闭浏览器即可。代码如下:</p>
+<pre><code class="language-python">from selenium import webdriver
+
+driver = webdriver.Chrome()		# 创建一个 Chrome 的驱动
+driver.get('https://www.baidu.com')		# 驱动浏览器打开百度的主页
+</code></pre>
+<p>当我们测试结束之后，如何关闭浏览器呢？代码如下:</p>
+<pre><code class="language-python">driver.close()		# 关闭浏览器
+</code></pre>
+
+          </div>
+          <div class="py-4 text-gray-600 flex items-center justify-between">
+            <div class="">
+              <div class="text-sm text-gray-300">最后更新于: </div>
+              <div class="text-base font-medium">2021.04.06</div>
+            </div>
+            <!-- <div class="flex items-center text-sm text-gray-600">
+              <i class="ri-eye-line"></i> <span class="ml-2">{{ views }}</span>
+            </div> -->
+          </div>
+          <div>
+            <div id="disqus_thread"></div>
+          </div>
+        </section>
+        
+          <!-- <aside class="sticky toc-container flex-shrink-0 hidden md:block">
+            <div class="text-gray-600 mb-4">目 录</div>
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#selenium-%E7%9A%84%E7%89%B9%E6%80%A7">Selenium 的特性</a></li>
+<li><a href="#%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2">发展历史</a></li>
+<li><a href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E">开发环境说明</a></li>
+<li><a href="#%E6%89%93%E5%BC%80%E5%92%8C%E5%85%B3%E9%97%AD%E6%B5%8F%E8%A7%88%E5%99%A8">打开和关闭浏览器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </aside> -->
+        
+      </div>
+    </div>
+    <div class="py-8 text-gray-300 text-center border-t border-gray-200">
+  Powered by Gridea
+</div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/@gridea/theme@1.0.8/js/main.js"></script>
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.0/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+    
+  
+</body>
+</html>
